@@ -48,14 +48,14 @@
     </div>
   </main>
 
-  <div class="modal" id="callModal">
+  <div class="modal modal--call" id="callModal">
     <div class="modal__container">
-      <p class="modal__status" id="callStatus">Status da chamada</p>
+      <p class="modal__status" id="callStatus">Status da chamada: <span id="callerName">Nenhuma</span></p>
       <div class="modal__actions">
-        <button class="modal__button modal__button--accept" id="btnAcceptCall" style="display: none">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall" style="display: none">
           <ion-icon name="call"></ion-icon>
         </button>
-        <button class="modal__button modal__button--end" id="btnEndCall" style="display: none">
+        <button class="modal__button--icon modal__button--end" id="btnEndCall" style="display: none">
           <ion-icon name="call"></ion-icon>
         </button>
       </div>
@@ -65,34 +65,30 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-    const pathParts = window.location.pathname.split('/');
-    const suiteId = pathParts[pathParts.length - 1];
-    const suiteName = `suite${suiteId}`;
-    let currentTarget = null;
-    let offerReceived = null;
-    let isBusy = false;
-    let stream = null;
-
     const localAudio = document.getElementById("localAudio");
     const remoteAudio = document.getElementById("remoteAudio");
     const callModal = document.getElementById("callModal");
     const callStatus = document.getElementById("callStatus");
     const btnAcceptCall = document.getElementById("btnAcceptCall");
     const btnEndCall = document.getElementById("btnEndCall");
+    const callerName = document.getElementById("callerName");
 
-    socket.emit("register", suiteName);
+    const pageRole = window.location.pathname.includes("lavanderia") ? "lavanderia" : "restaurante";
+    socket.emit("register", pageRole);
 
+    let currentTarget = null;
+    let stream = null;
     let pc = createPeerConnection();
 
     function createPeerConnection() {
-      const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
-      newPc.ontrack = event => { remoteAudio.srcObject = event.streams[0]; };
-      newPc.onicecandidate = event => {
-        if (event.candidate && currentTarget) {
-          socket.emit("signal", { to: currentTarget, data: { candidate: event.candidate } });
+      const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+      pc.ontrack = e => remoteAudio.srcObject = e.streams[0];
+      pc.onicecandidate = e => {
+        if (e.candidate && currentTarget) {
+          socket.emit("signal", { to: currentTarget, data: { candidate: e.candidate } });
         }
       };
-      return newPc;
+      return pc;
     }
 
     async function setupLocalStream() {
@@ -102,13 +98,8 @@
     }
 
     socket.on("call", async ({ from }) => {
-      if (isBusy) {
-        socket.emit("signal", { to: from, data: { busy: true } });
-        return;
-      }
       currentTarget = from;
-      offerReceived = true;
-      callStatus.textContent = `Chamada recebida de ${from}`;
+      callerName.textContent = `Recebendo chamada de ${from}`;
       callModal.classList.add("modal--visible");
       btnAcceptCall.style.display = "inline-block";
       btnEndCall.style.display = "inline-block";
@@ -116,42 +107,29 @@
 
     socket.on("signal", async ({ from, data }) => {
       if (data.offer) {
-        offerReceived = true;
         currentTarget = from;
+        await setupLocalStream();
         await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        socket.emit("signal", { to: from, data: { answer } });
       } else if (data.answer) {
         await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
-      } else if (data.candidate && pc.remoteDescription) {
+      } else if (data.candidate) {
         await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
-      } else if (data.busy) {
-        callStatus.textContent = `${from} está ocupado.`;
-        callModal.classList.remove("modal--visible");
-        btnAcceptCall.style.display = "none";
-        btnEndCall.style.display = "none";
       }
     });
 
     socket.on("end-call", () => {
-      endCall();
-    });
-
-    function endCall() {
-      isBusy = false;
       pc.close();
       pc = createPeerConnection();
-      if (stream) {
-        stream.getTracks().forEach(t => t.stop());
-        stream = null;
-      }
+      stream?.getTracks().forEach(track => track.stop());
+      callerName.textContent = "Nenhuma";
       callModal.classList.remove("modal--visible");
-      callStatus.textContent = "Status da chamada";
-      btnAcceptCall.style.display = "none";
-      btnEndCall.style.display = "none";
-    }
+    });
 
-    btnAcceptCall?.addEventListener("click", async () => {
-      isBusy = true;
-      if (!stream) await setupLocalStream();
+    btnAcceptCall.addEventListener("click", async () => {
+      await setupLocalStream();
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
       socket.emit("signal", { to: currentTarget, data: { answer } });
@@ -159,24 +137,13 @@
       btnAcceptCall.style.display = "none";
     });
 
-    btnEndCall?.addEventListener("click", () => {
+    btnEndCall.addEventListener("click", () => {
       socket.emit("end-call");
-      endCall();
-    });
-
-    document.getElementById("btn--call-to-reception")?.addEventListener("click", async () => {
-      if (isBusy) return alert("Suíte ocupada.");
-      isBusy = true;
-      currentTarget = "reception";
-      callStatus.textContent = "Chamando recepção...";
-      await setupLocalStream();
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
-      socket.emit("call", { to: currentTarget });
-      socket.emit("signal", { to: currentTarget, data: { offer } });
-      callModal.classList.add("modal--visible");
-      btnAcceptCall.style.display = "none";
-      btnEndCall.style.display = "inline-block";
+      pc.close();
+      pc = createPeerConnection();
+      stream?.getTracks().forEach(track => track.stop());
+      callerName.textContent = "Nenhuma";
+      callModal.classList.remove("modal--visible");
     });
   </script>
 </body>
