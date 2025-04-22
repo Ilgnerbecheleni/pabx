@@ -1,0 +1,530 @@
+/* Base Styles */
+:root {
+    --color-background: #121212;
+    --color-surface: #1e1e1e;
+    --color-surface-variant: #2d2d2d;
+    --color-primary: #bb86fc;
+    --color-primary-variant: #3700b3;
+    --color-secondary: #03dac6;
+    --color-error: #cf6679;
+    --color-on-background: #e1e1e1;
+    --color-on-surface: #ffffff;
+    --color-on-primary: #000000;
+    --color-on-secondary: #000000;
+    --color-available: #4caf50;
+    --color-occupied: #f44336;
+    --color-maintenance: #ff9800;
+    --border-radius: 12px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --font-family: 'Nunito', sans-serif;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 70px;
+    background-color: var(--color-surface-variant);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+}
+
+.sidebar__navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    height: 100%;
+}
+
+.sidebar .item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--spacing-sm) 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    color: var(--color-on-background);
+}
+
+.sidebar .item:hover, .sidebar .item.active {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.sidebar .item ion-icon {
+    font-size: 24px;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    margin-left: 70px;
+    padding: var(--spacing-lg);
+}
+
+.content__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content__generic {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Profile Section */
+.content__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xl);
+}
+
+.content__profile--title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.content__profile--subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.content__profile--user {
+    display: flex;
+    align-items: center;
+    margin-top: var(--spacing-md);
+}
+
+.user__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: var(--spacing-md);
+    background-color: var(--color-surface-variant);
+    padding: var(--spacing-xs);
+}
+
+.user__name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Suite Cards */
+.content__shortcut {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.shortcut__box {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.shortcut__box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.shortcut__box--suite__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.shortcut__box--suite__identifier {
+    display: flex;
+    align-items: center;
+}
+
+.suite__identifier--number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-right: var(--spacing-lg);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.suite__status--available {
+    background-color: var(--color-available);
+    color: var(--color-on-primary);
+}
+
+.suite__status--occupied {
+    background-color: var(--color-occupied);
+    color: var(--color-on-primary);
+}
+
+.suite__status--maintenance {
+    background-color: var(--color-maintenance);
+    color: var(--color-on-primary);
+}
+
+.suite__identifier--organizer {
+    flex: 1;
+}
+
+.suite__identifier--name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+}
+
+.suite__devices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.suite__devices > div {
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-surface-variant);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.suite__devices--img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1);
+}
+
+/* Status Card */
+.status-card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.status-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.status-card__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: var(--spacing-sm);
+}
+
+.status-dot--available {
+    background-color: var(--color-available);
+}
+
+.status-dot--occupied {
+    background-color: var(--color-occupied);
+}
+
+.status-dot--maintenance {
+    background-color: var(--color-maintenance);
+}
+
+.status-text {
+    font-size: 14px;
+}
+
+.status-card__call {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-surface-variant);
+}
+
+.call-status {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal__container {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal__status {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal__actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+}
+
+.modal__button--icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal__button--accept {
+    background-color: var(--color-available);
+}
+
+.modal__button--end {
+    background-color: var(--color-occupied);
+    transform: rotate(135deg);
+}
+
+.modal__button--icon ion-icon {
+    font-size: 24px;
+    color: var(--color-on-primary);
+}
+
+/* Suite Modal */
+dialog.modal {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+}
+
+dialog.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-variant);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--color-on-background);
+}
+
+.modal-suite {
+    margin-bottom: var(--spacing-xl);
+}
+
+.modal-suite__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-suite__identifier {
+    display: flex;
+    align-items: center;
+}
+
+.modal-suite__number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-right: var(--spacing-lg);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-suite__organizer {
+    flex: 1;
+}
+
+.modal-suite__name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-suite__devices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.modal-suite__devices--img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.modal-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.modal-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-btn {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-surface-variant);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-btn:hover {
+    background-color: var(--color-primary);
+}
+
+.modal__options--img {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content {
+        padding: var(--spacing-md);
+    }
+    
+    .modal-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 50px;
+    }
+    
+    .content {
+        margin-left: 50px;
+        padding: var(--spacing-sm);
+    }
+    
+    .sidebar .item {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .shortcut__box--suite__identifier {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .suite__identifier--number {
+        margin-bottom: var(--spacing-md);
+        margin-right: 0;
+    }
+    
+    .modal-buttons {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

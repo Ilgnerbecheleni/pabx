@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+  <link rel="stylesheet" href="/css/suite.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <title>Suíte</title>
+</head>
+<body>
+  <audio id="localAudio" autoplay muted></audio>
+  <audio id="remoteAudio" autoplay></audio>
+
+  <aside class="sidebar">
+    <nav class="sidebar__nav">
+      <a class="icon active" href="#home"><ion-icon name="home-outline"></ion-icon></a>
+      <a class="icon" href="#telephony"><ion-icon name="call"></ion-icon></a>
+      <a class="icon" href="#devices-light"><ion-icon name="bulb-outline"></ion-icon></a>
+      <a class="icon" href="#devices-air"><ion-icon name="snow-outline"></ion-icon></a>
+      <a class="icon" href="#restaurant"><ion-icon name="restaurant-outline"></ion-icon></a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="main__container">
+      <section class="profile-section">
+        <h2 class="profile-section__title">Motel Medieval</h2>
+        <p class="profile-section__subtitle">Suíte Black</p>
+      </section>
+
+      <section class="section" id="telephony">
+        <div class="section__header">
+          <h3 class="section__title">Telefonia</h3>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h4 class="contact-card__title">Recepção</h4>
+            <div class="contact-card__actions">
+              <div class="action-button" id="btn--call-to-reception">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="callModal">
+    <div class="modal__container">
+      <p class="modal__status" id="callStatus">Status da chamada</p>
+      <div class="modal__actions">
+        <button class="modal__button modal__button--accept" id="btnAcceptCall" style="display: none">
+          <ion-icon name="call"></ion-icon>
+        </button>
+        <button class="modal__button modal__button--end" id="btnEndCall" style="display: none">
+          <ion-icon name="call"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const pathParts = window.location.pathname.split('/');
+    const suiteId = pathParts[pathParts.length - 1];
+    const suiteName = `suite${suiteId}`;
+    let currentTarget = null;
+    let offerReceived = null;
+    let isBusy = false;
+    let stream = null;
+
+    const localAudio = document.getElementById("localAudio");
+    const remoteAudio = document.getElementById("remoteAudio");
+    const callModal = document.getElementById("callModal");
+    const callStatus = document.getElementById("callStatus");
+    const btnAcceptCall = document.getElementById("btnAcceptCall");
+    const btnEndCall = document.getElementById("btnEndCall");
+
+    socket.emit("register", suiteName);
+
+    let pc = createPeerConnection();
+
+    function createPeerConnection() {
+      const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+      newPc.ontrack = event => { remoteAudio.srcObject = event.streams[0]; };
+      newPc.onicecandidate = event => {
+        if (event.candidate && currentTarget) {
+          socket.emit("signal", { to: currentTarget, data: { candidate: event.candidate } });
+        }
+      };
+      return newPc;
+    }
+
+    async function setupLocalStream() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+      localAudio.srcObject = stream;
+    }
+
+    socket.on("call", async ({ from }) => {
+      if (isBusy) {
+        socket.emit("signal", { to: from, data: { busy: true } });
+        return;
+      }
+      currentTarget = from;
+      offerReceived = true;
+      callStatus.textContent = `Chamada recebida de ${from}`;
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "inline-block";
+      btnEndCall.style.display = "inline-block";
+    });
+
+    socket.on("signal", async ({ from, data }) => {
+      if (data.offer) {
+        offerReceived = true;
+        currentTarget = from;
+        await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+      } else if (data.answer) {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+      } else if (data.candidate && pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+      } else if (data.busy) {
+        callStatus.textContent = `${from} está ocupado.`;
+        callModal.classList.remove("modal--visible");
+        btnAcceptCall.style.display = "none";
+        btnEndCall.style.display = "none";
+      }
+    });
+
+    socket.on("end-call", () => {
+      endCall();
+    });
+
+    function endCall() {
+      isBusy = false;
+      pc.close();
+      pc = createPeerConnection();
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      callModal.classList.remove("modal--visible");
+      callStatus.textContent = "Status da chamada";
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "none";
+    }
+
+    btnAcceptCall?.addEventListener("click", async () => {
+      isBusy = true;
+      if (!stream) await setupLocalStream();
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      socket.emit("signal", { to: currentTarget, data: { answer } });
+      callStatus.textContent = `Chamada em andamento com ${currentTarget}`;
+      btnAcceptCall.style.display = "none";
+    });
+
+    btnEndCall?.addEventListener("click", () => {
+      socket.emit("end-call");
+      endCall();
+    });
+
+    document.getElementById("btn--call-to-reception")?.addEventListener("click", async () => {
+      if (isBusy) return alert("Suíte ocupada.");
+      isBusy = true;
+      currentTarget = "reception";
+      callStatus.textContent = "Chamando recepção...";
+      await setupLocalStream();
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socket.emit("call", { to: currentTarget });
+      socket.emit("signal", { to: currentTarget, data: { offer } });
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "inline-block";
+    });
+  </script>
+</body>
+</html>

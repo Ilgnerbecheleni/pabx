@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+    <link rel="stylesheet" href="css/restaurant.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <title>Restaurante</title>
+</head>
+<body>
+    <audio id="localAudio" autoplay muted></audio>
+    <audio id="remoteAudio" autoplay></audio>
+    <aside class="sidebar">
+        <nav class="sidebar__navigation">
+            <div class="item">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="call"></ion-icon>
+            </div>
+            <div class="item active">
+                <ion-icon name="restaurant-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="time-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="people-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="settings-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </div>
+        </nav>
+    </aside>
+    <main class="content">
+        <div class="content__container">
+            <section class="content__generic content__profile">
+                <h2 class="content__profile--title">Moteltech</h2>
+                <h1 class="content__profile--subtitle">Medieval</h1>
+                <div class="content__profile--user">
+                    <img class="user__icon" src="images/chef-icon.png">
+                    <p class="user__name">Restaurante</p>
+                </div>
+            </section>
+            
+            <!-- Orders Section -->
+            <section class="content__generic">
+                <div class="section__header">
+                    <h3 class="section__title">Pedidos Ativos</h3>
+                    <div class="section__actions">
+                        <button class="btn btn--primary">
+                            <ion-icon name="add-outline"></ion-icon>
+                            Novo Pedido
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="orders-container">
+                    <!-- Order Card 1 -->
+                    <div class="order-card order-card--new">
+                        <div class="order-card__header">
+                            <div class="order-card__suite">
+                                <span class="suite-number">01</span>
+                                <span class="suite-name">BLACK</span>
+                            </div>
+                            <div class="order-card__time">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <span>10:30</span>
+                            </div>
+                        </div>
+                        <div class="order-card__items">
+                            <div class="order-item">
+                                <span class="order-item__quantity">1x</span>
+                                <span class="order-item__name">Hambúrguer Especial</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">2x</span>
+                                <span class="order-item__name">Batata Frita</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">2x</span>
+                                <span class="order-item__name">Refrigerante Cola</span>
+                            </div>
+                        </div>
+                        <div class="order-card__footer">
+                            <div class="order-card__status">
+                                <span class="status-badge status-badge--new">Novo</span>
+                            </div>
+                            <div class="order-card__actions">
+                                <button class="btn btn--icon btn--accept">
+                                    <ion-icon name="checkmark-outline"></ion-icon>
+                                </button>
+                                <button class="btn btn--icon btn--call">
+                                    <ion-icon name="call-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Card 2 -->
+                    <div class="order-card order-card--preparing">
+                        <div class="order-card__header">
+                            <div class="order-card__suite">
+                                <span class="suite-number">03</span>
+                                <span class="suite-name">PREMIUM</span>
+                            </div>
+                            <div class="order-card__time">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <span>10:15</span>
+                            </div>
+                        </div>
+                        <div class="order-card__items">
+                            <div class="order-item">
+                                <span class="order-item__quantity">2x</span>
+                                <span class="order-item__name">Filé Mignon</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">1x</span>
+                                <span class="order-item__name">Salada Caesar</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">1x</span>
+                                <span class="order-item__name">Vinho Tinto</span>
+                            </div>
+                        </div>
+                        <div class="order-card__footer">
+                            <div class="order-card__status">
+                                <span class="status-badge status-badge--preparing">Preparando</span>
+                            </div>
+                            <div class="order-card__actions">
+                                <button class="btn btn--icon btn--complete">
+                                    <ion-icon name="checkmark-done-outline"></ion-icon>
+                                </button>
+                                <button class="btn btn--icon btn--call">
+                                    <ion-icon name="call-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Card 3 -->
+                    <div class="order-card order-card--ready">
+                        <div class="order-card__header">
+                            <div class="order-card__suite">
+                                <span class="suite-number">02</span>
+                                <span class="suite-name">ROYAL</span>
+                            </div>
+                            <div class="order-card__time">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <span>10:05</span>
+                            </div>
+                        </div>
+                        <div class="order-card__items">
+                            <div class="order-item">
+                                <span class="order-item__quantity">2x</span>
+                                <span class="order-item__name">Pizza Margherita</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">1x</span>
+                                <span class="order-item__name">Tiramisu</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="order-item__quantity">2x</span>
+                                <span class="order-item__name">Água Mineral</span>
+                            </div>
+                        </div>
+                        <div class="order-card__footer">
+                            <div class="order-card__status">
+                                <span class="status-badge status-badge--ready">Pronto</span>
+                            </div>
+                            <div class="order-card__actions">
+                                <button class="btn btn--icon btn--deliver">
+                                    <ion-icon name="bicycle-outline"></ion-icon>
+                                </button>
+                                <button class="btn btn--icon btn--call">
+                                    <ion-icon name="call-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Menu Section -->
+            <section class="content__generic">
+                <div class="section__header">
+                    <h3 class="section__title">Menu do Dia</h3>
+                    <div class="section__actions">
+                        <button class="btn btn--secondary">
+                            <ion-icon name="create-outline"></ion-icon>
+                            Editar Menu
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="menu-container">
+                    <div class="menu-category">
+                        <h4 class="menu-category__title">Entradas</h4>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Bruschetta</h5>
+                                    <p class="menu-item__description">Pão italiano com tomate, alho e manjericão</p>
+                                </div>
+                                <div class="menu-item__price">R$ 25,00</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Carpaccio</h5>
+                                    <p class="menu-item__description">Finas fatias de carne com molho especial</p>
+                                </div>
+                                <div class="menu-item__price">R$ 35,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-category">
+                        <h4 class="menu-category__title">Pratos Principais</h4>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Filé Mignon</h5>
+                                    <p class="menu-item__description">Filé grelhado com molho de vinho tinto</p>
+                                </div>
+                                <div class="menu-item__price">R$ 75,00</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Salmão Grelhado</h5>
+                                    <p class="menu-item__description">Salmão com ervas e limão</p>
+                                </div>
+                                <div class="menu-item__price">R$ 65,00</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Risoto de Funghi</h5>
+                                    <p class="menu-item__description">Arroz arbóreo com cogumelos frescos</p>
+                                </div>
+                                <div class="menu-item__price">R$ 55,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-category">
+                        <h4 class="menu-category__title">Sobremesas</h4>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Tiramisu</h5>
+                                    <p class="menu-item__description">Clássica sobremesa italiana</p>
+                                </div>
+                                <div class="menu-item__price">R$ 30,00</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item__info">
+                                    <h5 class="menu-item__name">Petit Gateau</h5>
+                                    <p class="menu-item__description">Bolo de chocolate com centro derretido</p>
+                                </div>
+                                <div class="menu-item__price">R$ 35,00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Call Modal -->
+    <div class="modal modal--call" id="callModal">
+        <div class="modal__container">
+            <p class="modal__status">Recebendo chamada de suíte Black...</p>
+            <div class="modal__actions">
+                <button class="modal__button--icon modal__button--accept">
+                    <ion-icon name="call"></ion-icon>
+                </button>
+                <button class="modal__button--icon modal__button--end">
+                    <ion-icon name="call"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Order Modal -->
+    <dialog id="newOrderModal" class="modal">
+        <div class="modal-content">
+            <div class="close-btn" id="closeOrderModal">✕</div>
+            
+            <div class="modal-header">
+                <h3 class="modal-title">Novo Pedido</h3>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="suiteSelect">Suíte</label>
+                    <select id="suiteSelect" class="form-control">
+                        <option value="1">01 - BLACK</option>
+                        <option value="2">02 - ROYAL</option>
+                        <option value="3">03 - PREMIUM</option>
+                        <option value="4">04 - DELUXE</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Itens do Pedido</label>
+                    <div class="order-builder">
+                        <div class="order-builder__item">
+                            <select class="form-control">
+                                <option value="">Selecione um item</option>
+                                <option value="bruschetta">Bruschetta</option>
+                                <option value="carpaccio">Carpaccio</option>
+                                <option value="file">Filé Mignon</option>
+                                <option value="salmao">Salmão Grelhado</option>
+                                <option value="risoto">Risoto de Funghi</option>
+                                <option value="tiramisu">Tiramisu</option>
+                                <option value="petit">Petit Gateau</option>
+                            </select>
+                            <input type="number" class="form-control form-control--small" min="1" value="1">
+                            <button class="btn btn--icon btn--remove">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn--secondary btn--small btn--add-item">
+                            <ion-icon name="add-outline"></ion-icon>
+                            Adicionar Item
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderNotes">Observações</label>
+                    <textarea id="orderNotes" class="form-control" rows="3" placeholder="Observações especiais para o pedido..."></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn--secondary" id="cancelOrderBtn">Cancelar</button>
+                <button class="btn btn--primary" id="saveOrderBtn">Salvar Pedido</button>
+            </div>
+        </div>
+    </dialog>
+    
+    <script>
+        // Open new order modal
+        document.querySelector('.btn--primary').addEventListener('click', () => {
+            document.getElementById('newOrderModal').showModal();
+        });
+        
+        // Close new order modal
+        document.getElementById('closeOrderModal').addEventListener('click', () => {
+            document.getElementById('newOrderModal').close();
+        });
+        
+        document.getElementById('cancelOrderBtn').addEventListener('click', () => {
+            document.getElementById('newOrderModal').close();
+        });
+        
+        // Show call modal (for demo purposes)
+        setTimeout(() => {
+            document.getElementById('callModal').classList.add('modal--visible');
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                document.getElementById('callModal').classList.remove('modal--visible');
+            }, 5000);
+        }, 10000);
+    </script>
+</body>
+</html>

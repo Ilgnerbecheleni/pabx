@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/reception.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <title>Recepção</title>
+</head>
+<body>
+  <audio id="localAudio" autoplay muted></audio>
+  <audio id="remoteAudio" autoplay></audio>
+
+  <aside class="sidebar">
+    <nav class="sidebar__navigation">
+      <div class="item active"><ion-icon name="home-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="call"></ion-icon></div>
+      <div class="item"><ion-icon name="bulb-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="snow-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="tv-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="volume-high-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="play-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="restaurant-outline"></ion-icon></div>
+      <div class="item"><ion-icon name="arrow-back-outline"></ion-icon></div>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="content__container">
+      <section class="content__generic content__profile">
+        <h2 class="content__profile--title">Moteltech</h2>
+        <h1 class="content__profile--subtitle">Medieval</h1>
+        <div class="content__profile--user">
+          <img class="user__icon" src="images/user-icon.png">
+          <p class="user__name">Recepção</p>
+        </div>
+      </section>
+
+      <section class="content__generic">
+        <div class="content__shortcut">
+          <div class="shortcut__box shortcut__box--suite" id="suiteCard1">
+            <div class="shortcut__box--suite__container">
+              <div class="shortcut__box--suite__identifier">
+                <h1 class="suite__identifier--number suite__status--available">01</h1>
+                <div class="suite__identifier--organizer">
+                  <p class="suite__identifier--name">BLACK</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shortcut__box shortcut__box--suite" id="suiteCard2">
+            <div class="shortcut__box--suite__container">
+              <div class="shortcut__box--suite__identifier">
+                <h1 class="suite__identifier--number suite__status--occupied">02</h1>
+                <div class="suite__identifier--organizer">
+                  <p class="suite__identifier--name">ROYAL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content__generic">
+        <div class="status-card">
+          <h2 class="status-card__title">Status das Suítes</h2>
+          <div class="status-card__grid">
+            <div class="status-item"><span class="status-dot status-dot--available"></span><span class="status-text">01 - BLACK</span></div>
+            <div class="status-item"><span class="status-dot status-dot--occupied"></span><span class="status-text">02 - ROYAL</span></div>
+            <div class="status-item"><span class="status-dot status-dot--maintenance"></span><span class="status-text">03 - PREMIUM</span></div>
+            <div class="status-item"><span class="status-dot status-dot--available"></span><span class="status-text">04 - DELUXE</span></div>
+          </div>
+          <div class="status-card__call">
+            <span id="callStatus" class="call-status">Status da chamada: Nenhuma</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal modal--call" id="callModal">
+    <div class="modal__container">
+        <p class="modal__status" id="callStatus">Status da chamada: <span id="callerName">Nenhuma</span></p>
+
+      <div class="modal__actions">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall" style="display:none">
+          <ion-icon name="call"></ion-icon>
+        </button>
+        <button class="modal__button--icon modal__button--end" id="btnEndCall" style="display:none">
+          <ion-icon name="call"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const localAudio = document.getElementById("localAudio");
+    const remoteAudio = document.getElementById("remoteAudio");
+    const callModal = document.getElementById("callModal");
+    const callStatus = document.getElementById("callStatus");
+    const btnAcceptCall = document.getElementById("btnAcceptCall");
+    const btnEndCall = document.getElementById("btnEndCall");
+   
+
+
+    let currentTarget = null;
+    let stream = null;
+    let isBusy = false;
+
+    socket.emit("register", "reception");
+    let pc = createPeerConnection();
+
+    async function setupLocalStream() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+      localAudio.srcObject = stream;
+    }
+
+    function createPeerConnection() {
+      const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+      newPc.ontrack = event => { remoteAudio.srcObject = event.streams[0]; };
+      newPc.onicecandidate = event => {
+        if (event.candidate && currentTarget) {
+          socket.emit("signal", { to: currentTarget, data: { candidate: event.candidate } });
+        }
+      };
+      return newPc;
+    }
+
+    function showButtons({ accept = false, end = false }) {
+      btnAcceptCall.style.display = accept ? "inline-block" : "none";
+      btnEndCall.style.display = end ? "inline-block" : "none";
+    }
+
+    function getFriendlyName(id) {
+      const map = {
+        suite1: "Suíte 01",
+        suite2: "Suíte 02",
+        suite3: "Suíte 03"
+      };
+      return map[id] || id;
+    }
+
+    socket.on("signal", async ({ from, data }) => {
+      if (data.offer) {
+        document.getElementById("callerName").textContent = `Recebendo chamada de ${getFriendlyName(from)}`;
+
+        if (isBusy) {
+          socket.emit("signal", { to: from, data: { busy: true } });
+          return;
+        }
+        currentTarget = from;
+        await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+        callStatus.textContent = `Recebendo chamada de ${getFriendlyName(from)}`;
+        callModal.classList.add("modal--visible");
+        showButtons({ accept: true, end: true });
+      } else if (data.answer) {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+      } else if (data.candidate && pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+      } else if (data.busy) {
+        callStatus.textContent = `${getFriendlyName(from)} está ocupado.`;
+        callModal.classList.remove("modal--visible");
+        showButtons({ accept: false, end: false });
+      }
+    });
+
+    socket.on("end-call", () => {
+      endCurrentCall();
+    });
+
+    function endCurrentCall() {
+      isBusy = false;
+      pc.close();
+      pc = createPeerConnection();
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      callModal.classList.remove("modal--visible");
+      callStatus.textContent = "Status da chamada: Nenhuma";
+      showButtons({});
+    }
+
+    function startCall(toSuite) {
+      return async () => {
+        if (isBusy) return alert("A recepção está ocupada no momento.");
+        isBusy = true;
+        currentTarget = toSuite;
+        callStatus.textContent = `Chamando ${getFriendlyName(toSuite)}...`;
+        await setupLocalStream();
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        socket.emit("call", { to: currentTarget });
+        socket.emit("signal", { to: currentTarget, data: { offer } });
+        callModal.classList.add("modal--visible");
+        showButtons({ end: true });
+      };
+    }
+
+    document.getElementById("suiteCard1")?.addEventListener("click", startCall("suite1"));
+    document.getElementById("suiteCard2")?.addEventListener("click", startCall("suite2"));
+
+    btnAcceptCall?.addEventListener("click", async () => {
+      isBusy = true;
+      if (!stream) await setupLocalStream();
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      socket.emit("signal", { to: currentTarget, data: { answer } });
+      callStatus.textContent = `Chamada em andamento com ${getFriendlyName(currentTarget)}`;
+      btnAcceptCall.style.display = "none";
+    });
+
+    btnEndCall?.addEventListener("click", () => {
+      socket.emit("end-call");
+      endCurrentCall();
+    });
+  </script>
+</body>
+</html>
