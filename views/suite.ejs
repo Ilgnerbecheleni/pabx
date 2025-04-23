@@ -14,49 +14,427 @@
   <audio id="remoteAudio" autoplay></audio>
 
   <aside class="sidebar">
-    <nav class="sidebar__nav">
-      <a class="icon active" href="#home"><ion-icon name="home-outline"></ion-icon></a>
-      <a class="icon" href="#telephony"><ion-icon name="call"></ion-icon></a>
-      <a class="icon" href="#devices-light"><ion-icon name="bulb-outline"></ion-icon></a>
-      <a class="icon" href="#devices-air"><ion-icon name="snow-outline"></ion-icon></a>
-      <a class="icon" href="#restaurant"><ion-icon name="restaurant-outline"></ion-icon></a>
+    <div class="sidebar__logo">
+      <ion-icon name="bed-outline"></ion-icon>
+      <span class="logo-text">Moteltech</span>
+    </div>
+    <nav class="sidebar__navigation">
+      <div class="item active">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="item-label">Início</span>
+      </div>
+      <div class="item" id="nav-telephony">
+        <ion-icon name="call-outline"></ion-icon>
+        <span class="item-label">Telefonia</span>
+      </div>
+      <div class="item" id="nav-lights">
+        <ion-icon name="bulb-outline"></ion-icon>
+        <span class="item-label">Iluminação</span>
+      </div>
+      <div class="item" id="nav-climate">
+        <ion-icon name="snow-outline"></ion-icon>
+        <span class="item-label">Climatização</span>
+      </div>
+      <div class="item" id="nav-tv">
+        <ion-icon name="tv-outline"></ion-icon>
+        <span class="item-label">TV</span>
+      </div>
+      <div class="item" id="nav-audio">
+        <ion-icon name="volume-high-outline"></ion-icon>
+        <span class="item-label">Áudio</span>
+      </div>
+      <div class="item" id="nav-restaurant">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <span class="item-label">Restaurante</span>
+      </div>
     </nav>
+    <div class="sidebar__footer">
+      <div class="item">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        <span class="item-label">Ajuda</span>
+      </div>
+    </div>
   </aside>
 
-  <main class="main">
-    <div class="main__container">
-      <section class="profile-section">
-        <h2 class="profile-section__title">Motel Medieval</h2>
-        <p class="profile-section__subtitle">Suíte Black</p>
+  <main class="content">
+    <header class="content__header">
+      <div class="header__left">
+        <button class="btn btn--icon sidebar-toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <h1 class="header__title">Suíte Black</h1>
+      </div>
+      <div class="header__right">
+        <div class="time-display">
+          <ion-icon name="time-outline"></ion-icon>
+          <span id="current-time">00:00</span>
+        </div>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <span class="user-name">Hóspede</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content__container">
+      <!-- Welcome Section -->
+      <section class="welcome-section">
+        <div class="welcome-card">
+          <div class="welcome-card__content">
+            <h2>Bem-vindo ao Motel Medieval</h2>
+            <p>Esperamos que tenha uma estadia agradável. Use o painel de controle para gerenciar todos os recursos da sua suíte.</p>
+          </div>
+          <div class="welcome-card__image">
+            <ion-icon name="bed-outline"></ion-icon>
+          </div>
+        </div>
       </section>
 
-      <section class="section" id="telephony">
+      <!-- Quick Actions -->
+      <section class="quick-actions">
         <div class="section__header">
-          <h3 class="section__title">Telefonia</h3>
+          <h2 class="section__title">Ações Rápidas</h2>
         </div>
-        <div class="contact-grid">
+        <div class="actions-grid">
+          <div class="action-card" id="action-dnd">
+            <div class="action-card__icon">
+              <ion-icon name="moon-outline"></ion-icon>
+            </div>
+            <div class="action-card__content">
+              <h3>Não Perturbe</h3>
+              <p>Ativar modo não perturbe</p>
+            </div>
+            <div class="action-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" id="toggle-dnd">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="action-card" id="action-lights">
+            <div class="action-card__icon">
+              <ion-icon name="bulb-outline"></ion-icon>
+            </div>
+            <div class="action-card__content">
+              <h3>Iluminação</h3>
+              <p>Controlar luzes da suíte</p>
+            </div>
+            <div class="action-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" id="toggle-lights" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="action-card" id="action-climate">
+            <div class="action-card__icon">
+              <ion-icon name="thermometer-outline"></ion-icon>
+            </div>
+            <div class="action-card__content">
+              <h3>Temperatura</h3>
+              <p>22°C</p>
+            </div>
+            <div class="action-card__controls">
+              <button class="btn btn--icon btn--small" id="temp-down">
+                <ion-icon name="remove-outline"></ion-icon>
+              </button>
+              <button class="btn btn--icon btn--small" id="temp-up">
+                <ion-icon name="add-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="action-card" id="action-housekeeping">
+            <div class="action-card__icon">
+              <ion-icon name="sparkles-outline"></ion-icon>
+            </div>
+            <div class="action-card__content">
+              <h3>Limpeza</h3>
+              <p>Solicitar serviço de limpeza</p>
+            </div>
+            <div class="action-card__button">
+              <button class="btn btn--primary btn--small">Solicitar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Telephony Section -->
+      <section class="content__section" id="telephony-section">
+        <div class="section__header">
+          <h2 class="section__title">Telefonia</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline">
+              <ion-icon name="time-outline"></ion-icon>
+              Histórico
+            </button>
+          </div>
+        </div>
+        
+        <div class="contacts-grid">
           <div class="contact-card">
-            <h4 class="contact-card__title">Recepção</h4>
-            <div class="contact-card__actions">
-              <div class="action-button" id="btn--call-to-reception">
+            <div class="contact-card__icon">
+              <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <div class="contact-card__content">
+              <h3 class="contact-card__title">Recepção</h3>
+              <p class="contact-card__description">Atendimento 24h</p>
+              <div class="contact-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Disponível</span>
+              </div>
+            </div>
+            <div class="contact-card__action">
+              <button class="btn btn--primary btn--call" id="btn--call-to-reception">
                 <ion-icon name="call-outline"></ion-icon>
+                <span>Chamar</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-card__icon">
+              <ion-icon name="shirt-outline"></ion-icon>
+            </div>
+            <div class="contact-card__content">
+              <h3 class="contact-card__title">Lavanderia</h3>
+              <p class="contact-card__description">Serviços de lavagem e passadoria</p>
+              <div class="contact-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Disponível</span>
+              </div>
+            </div>
+            <div class="contact-card__action">
+              <button class="btn btn--primary btn--call" id="btn--call-to-lavanderia">
+                <ion-icon name="call-outline"></ion-icon>
+                <span>Chamar</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-card__icon">
+              <ion-icon name="restaurant-outline"></ion-icon>
+            </div>
+            <div class="contact-card__content">
+              <h3 class="contact-card__title">Restaurante</h3>
+              <p class="contact-card__description">Serviço de alimentação e bebidas</p>
+              <div class="contact-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Disponível</span>
+              </div>
+            </div>
+            <div class="contact-card__action">
+              <button class="btn btn--primary btn--call" id="btn--call-to-restaurante">
+                <ion-icon name="call-outline"></ion-icon>
+                <span>Chamar</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-card__icon">
+              <ion-icon name="construct-outline"></ion-icon>
+            </div>
+            <div class="contact-card__content">
+              <h3 class="contact-card__title">Manutenção</h3>
+              <p class="contact-card__description">Serviços de reparo e manutenção</p>
+              <div class="contact-card__status">
+                <span class="status-indicator status-indicator--offline"></span>
+                <span>Indisponível</span>
+              </div>
+            </div>
+            <div class="contact-card__action">
+              <button class="btn btn--primary btn--call" disabled>
+                <ion-icon name="call-outline"></ion-icon>
+                <span>Chamar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lighting Control Section -->
+      <section class="content__section" id="lighting-section">
+        <div class="section__header">
+          <h2 class="section__title">Controle de Iluminação</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline" id="btn-all-lights">
+              <ion-icon name="power-outline"></ion-icon>
+              Todas as Luzes
+            </button>
+          </div>
+        </div>
+        
+        <div class="lighting-grid">
+          <div class="lighting-card">
+            <div class="lighting-card__icon">
+              <ion-icon name="bed-outline"></ion-icon>
+            </div>
+            <div class="lighting-card__content">
+              <h3>Quarto Principal</h3>
+              <div class="lighting-card__slider">
+                <input type="range" min="0" max="100" value="80" class="slider" id="bedroom-light">
+                <span class="slider-value">80%</span>
+              </div>
+            </div>
+            <div class="lighting-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="lighting-card">
+            <div class="lighting-card__icon">
+              <ion-icon name="water-outline"></ion-icon>
+            </div>
+            <div class="lighting-card__content">
+              <h3>Banheiro</h3>
+              <div class="lighting-card__slider">
+                <input type="range" min="0" max="100" value="60" class="slider" id="bathroom-light">
+                <span class="slider-value">60%</span>
+              </div>
+            </div>
+            <div class="lighting-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="lighting-card">
+            <div class="lighting-card__icon">
+              <ion-icon name="wine-outline"></ion-icon>
+            </div>
+            <div class="lighting-card__content">
+              <h3>Área de Relaxamento</h3>
+              <div class="lighting-card__slider">
+                <input type="range" min="0" max="100" value="40" class="slider" id="relax-light">
+                <span class="slider-value">40%</span>
+              </div>
+            </div>
+            <div class="lighting-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="lighting-card">
+            <div class="lighting-card__icon">
+              <ion-icon name="color-palette-outline"></ion-icon>
+            </div>
+            <div class="lighting-card__content">
+              <h3>Iluminação Ambiente</h3>
+              <div class="lighting-card__colors">
+                <div class="color-option color-option--red"></div>
+                <div class="color-option color-option--blue"></div>
+                <div class="color-option color-option--green"></div>
+                <div class="color-option color-option--purple active"></div>
+                <div class="color-option color-option--orange"></div>
+              </div>
+            </div>
+            <div class="lighting-card__toggle">
+              <label class="toggle">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Climate Control Section -->
+      <section class="content__section" id="climate-section">
+        <div class="section__header">
+          <h2 class="section__title">Controle de Climatização</h2>
+        </div>
+        
+        <div class="climate-control">
+          <div class="temperature-display">
+            <div class="temperature-circle">
+              <div class="temperature-value">22°C</div>
+              <div class="temperature-status">Temperatura Atual</div>
+            </div>
+            <div class="temperature-controls">
+              <button class="btn btn--icon btn--large" id="temp-down-large">
+                <ion-icon name="remove-outline"></ion-icon>
+              </button>
+              <button class="btn btn--icon btn--large" id="temp-up-large">
+                <ion-icon name="add-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="climate-options">
+            <div class="climate-option">
+              <div class="climate-option__icon">
+                <ion-icon name="snow-outline"></ion-icon>
+              </div>
+              <div class="climate-option__label">Refrigeração</div>
+              <div class="climate-option__toggle">
+                <label class="toggle">
+                  <input type="radio" name="climate-mode" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="climate-option">
+              <div class="climate-option__icon">
+                <ion-icon name="flame-outline"></ion-icon>
+              </div>
+              <div class="climate-option__label">Aquecimento</div>
+              <div class="climate-option__toggle">
+                <label class="toggle">
+                  <input type="radio" name="climate-mode">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="climate-option">
+              <div class="climate-option__icon">
+                <ion-icon name="water-outline"></ion-icon>
+              </div>
+              <div class="climate-option__label">Desumidificação</div>
+              <div class="climate-option__toggle">
+                <label class="toggle">
+                  <input type="radio" name="climate-mode">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="climate-option">
+              <div class="climate-option__icon">
+                <ion-icon name="refresh-outline"></ion-icon>
+              </div>
+              <div class="climate-option__label">Ventilação</div>
+              <div class="climate-option__toggle">
+                <label class="toggle">
+                  <input type="radio" name="climate-mode">
+                  <span class="toggle-slider"></span>
+                </label>
               </div>
             </div>
           </div>
-          <div class="contact-card">
-            <h4 class="contact-card__title">Lavanderia</h4>
-            <div class="contact-card__actions">
-              <div class="action-button" id="btn--call-to-lavanderia">
-                <ion-icon name="call-outline"></ion-icon>
-              </div>
-            </div>
-          </div>
-          <div class="contact-card">
-            <h4 class="contact-card__title">Restaurante</h4>
-            <div class="contact-card__actions">
-              <div class="action-button" id="btn--call-to-restaurante">
-                <ion-icon name="call-outline"></ion-icon>
-              </div>
+          
+          <div class="fan-speed">
+            <h3>Velocidade do Ventilador</h3>
+            <div class="fan-speed__options">
+              <button class="fan-speed__option active">Baixa</button>
+              <button class="fan-speed__option">Média</button>
+              <button class="fan-speed__option">Alta</button>
+              <button class="fan-speed__option">Auto</button>
             </div>
           </div>
         </div>
@@ -64,15 +442,33 @@
     </div>
   </main>
 
-  <div class="modal" id="callModal">
+  <!-- Call Modal -->
+  <div class="modal modal--call" id="callModal">
     <div class="modal__container">
-      <p class="modal__status" id="callStatus">Status da chamada</p>
-      <div class="modal__actions">
-        <button class="modal__button modal__button--accept" id="btnAcceptCall" style="display: none">
-          <ion-icon name="call"></ion-icon>
+      <div class="modal__header">
+        <h3 class="modal__title">Chamada</h3>
+        <button class="modal__close">
+          <ion-icon name="close-outline"></ion-icon>
         </button>
-        <button class="modal__button modal__button--end" id="btnEndCall" style="display: none">
+      </div>
+      <div class="modal__content">
+        <div class="call-animation">
+          <div class="call-icon">
+            <ion-icon name="call"></ion-icon>
+          </div>
+          <div class="call-waves"></div>
+        </div>
+        <p class="modal__status" id="callStatus">Status da chamada</p>
+        <div class="call-timer">00:00</div>
+      </div>
+      <div class="modal__actions">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall">
           <ion-icon name="call"></ion-icon>
+          <span>Atender</span>
+        </button>
+        <button class="modal__button--icon modal__button--end" id="btnEndCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Encerrar</span>
         </button>
       </div>
     </div>
@@ -80,14 +476,115 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    // Toggle sidebar on mobile
+    document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('sidebar--expanded');
+    });
+    
+    // Update current time
+    function updateTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+    }
+    
+    updateTime();
+    setInterval(updateTime, 60000);
+    
+    // Navigation
+    document.getElementById('nav-telephony').addEventListener('click', () => {
+      document.getElementById('telephony-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.getElementById('nav-lights').addEventListener('click', () => {
+      document.getElementById('lighting-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.getElementById('nav-climate').addEventListener('click', () => {
+      document.getElementById('climate-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Temperature controls
+    let temperature = 22;
+    
+    function updateTemperature() {
+      document.querySelector('.temperature-value').textContent = `${temperature}°C`;
+      document.querySelector('#action-climate p').textContent = `${temperature}°C`;
+    }
+    
+    document.getElementById('temp-down').addEventListener('click', () => {
+      if (temperature > 16) {
+        temperature--;
+        updateTemperature();
+      }
+    });
+    
+    document.getElementById('temp-up').addEventListener('click', () => {
+      if (temperature < 30) {
+        temperature++;
+        updateTemperature();
+      }
+    });
+    
+    document.getElementById('temp-down-large').addEventListener('click', () => {
+      if (temperature > 16) {
+        temperature--;
+        updateTemperature();
+      }
+    });
+    
+    document.getElementById('temp-up-large').addEventListener('click', () => {
+      if (temperature < 30) {
+        temperature++;
+        updateTemperature();
+      }
+    });
+    
+    // Lighting sliders
+    document.querySelectorAll('.lighting-card__slider .slider').forEach(slider => {
+      const valueDisplay = slider.nextElementSibling;
+      slider.addEventListener('input', () => {
+        valueDisplay.textContent = `${slider.value}%`;
+      });
+    });
+    
+    // Toggle all lights
+    document.getElementById('btn-all-lights').addEventListener('click', function() {
+      const allToggles = document.querySelectorAll('.lighting-card__toggle input[type="checkbox"]');
+      const allOn = Array.from(allToggles).every(toggle => toggle.checked);
+      
+      allToggles.forEach(toggle => {
+        toggle.checked = !allOn;
+      });
+    });
+    
+    // Color options
+    document.querySelectorAll('.color-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelector('.color-option.active').classList.remove('active');
+        option.classList.add('active');
+      });
+    });
+    
+    // Fan speed options
+    document.querySelectorAll('.fan-speed__option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelector('.fan-speed__option.active').classList.remove('active');
+        option.classList.add('active');
+      });
+    });
+    
+    // VOIP Functionality
     const socket = io();
     const pathParts = window.location.pathname.split('/');
-    const suiteId = pathParts[pathParts.length - 1];
+    const suiteId = pathParts[pathParts.length - 1] || '1'; // Default to 1 if not specified
     const suiteName = `suite${suiteId}`;
     let currentTarget = null;
-    let offerReceived = null;
     let isBusy = false;
     let stream = null;
+    let callTimer = null;
+    let callSeconds = 0;
 
     const localAudio = document.getElementById("localAudio");
     const remoteAudio = document.getElementById("remoteAudio");
@@ -95,9 +592,9 @@
     const callStatus = document.getElementById("callStatus");
     const btnAcceptCall = document.getElementById("btnAcceptCall");
     const btnEndCall = document.getElementById("btnEndCall");
+    const modalClose = document.querySelector('.modal__close');
 
     socket.emit("register", suiteName);
-
     let pc = createPeerConnection();
 
     function createPeerConnection() {
@@ -117,31 +614,59 @@
       localAudio.srcObject = stream;
     }
 
+    function startCallTimer() {
+      callSeconds = 0;
+      document.querySelector('.call-timer').textContent = '00:00';
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.add('in-call');
+      
+      callTimer = setInterval(() => {
+        callSeconds++;
+        const minutes = Math.floor(callSeconds / 60);
+        const seconds = callSeconds % 60;
+        document.querySelector('.call-timer').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function getFriendlyName(id) {
+      const map = {
+        reception: "Recepção",
+        lavanderia: "Lavanderia",
+        restaurante: "Restaurante"
+      };
+      return map[id] || id;
+    }
+
     socket.on("call", async ({ from }) => {
       if (isBusy) {
         socket.emit("signal", { to: from, data: { busy: true } });
         return;
       }
       currentTarget = from;
-      offerReceived = true;
-      callStatus.textContent = `Chamada recebida de ${from}`;
+      callStatus.textContent = `Recebendo chamada de ${getFriendlyName(from)}`;
       callModal.classList.add("modal--visible");
-      btnAcceptCall.style.display = "inline-block";
-      btnEndCall.style.display = "inline-block";
+      btnAcceptCall.style.display = "flex";
+      btnEndCall.style.display = "flex";
+      
+      // Add ringing animation
+      document.querySelector('.call-animation').classList.add('ringing');
     });
 
     socket.on("signal", async ({ from, data }) => {
       if (data.offer) {
-        offerReceived = true;
         currentTarget = from;
         await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
       } else if (data.answer) {
         await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+        startCallTimer();
       } else if (data.candidate && pc.remoteDescription) {
         await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
       } else if (data.busy) {
-        callStatus.textContent = `${from} está ocupado.`;
-        callModal.classList.remove("modal--visible");
+        callStatus.textContent = `${getFriendlyName(from)} está ocupado.`;
+        setTimeout(() => {
+          callModal.classList.remove("modal--visible");
+        }, 3000);
         btnAcceptCall.style.display = "none";
         btnEndCall.style.display = "none";
       }
@@ -163,7 +688,37 @@
       callStatus.textContent = "Status da chamada";
       btnAcceptCall.style.display = "none";
       btnEndCall.style.display = "none";
+      
+      if (callTimer) {
+        clearInterval(callTimer);
+        callTimer = null;
+      }
+      
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.remove('in-call');
     }
+
+    async function startCall(toTarget) {
+      if (isBusy) return alert("Suíte ocupada.");
+      isBusy = true;
+      currentTarget = toTarget;
+      callStatus.textContent = `Chamando ${getFriendlyName(toTarget)}...`;
+      await setupLocalStream();
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socket.emit("call", { to: currentTarget });
+      socket.emit("signal", { to: currentTarget, data: { offer } });
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "flex";
+      
+      // Add calling animation
+      document.querySelector('.call-animation').classList.add('ringing');
+    }
+
+    document.getElementById("btn--call-to-reception")?.addEventListener("click", () => startCall("reception"));
+    document.getElementById("btn--call-to-lavanderia")?.addEventListener("click", () => startCall("lavanderia"));
+    document.getElementById("btn--call-to-restaurante")?.addEventListener("click", () => startCall("restaurante"));
 
     btnAcceptCall?.addEventListener("click", async () => {
       isBusy = true;
@@ -171,35 +726,26 @@
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
       socket.emit("signal", { to: currentTarget, data: { answer } });
-      callStatus.textContent = `Chamada em andamento com ${currentTarget}`;
+      callStatus.textContent = `Chamada em andamento com ${getFriendlyName(currentTarget)}`;
       btnAcceptCall.style.display = "none";
+      startCallTimer();
     });
 
     btnEndCall?.addEventListener("click", () => {
       socket.emit("end-call");
       endCall();
     });
-
-    function startCall(toTarget) {
-      return async () => {
-        if (isBusy) return alert("Suíte ocupada.");
-        isBusy = true;
-        currentTarget = toTarget;
-        callStatus.textContent = `Chamando ${toTarget}...`;
-        await setupLocalStream();
-        const offer = await pc.createOffer();
-        await pc.setLocalDescription(offer);
-        socket.emit("call", { to: currentTarget });
-        socket.emit("signal", { to: currentTarget, data: { offer } });
-        callModal.classList.add("modal--visible");
-        btnAcceptCall.style.display = "none";
-        btnEndCall.style.display = "inline-block";
-      };
-    }
-
-    document.getElementById("btn--call-to-reception")?.addEventListener("click", startCall("reception"));
-    document.getElementById("btn--call-to-lavanderia")?.addEventListener("click", startCall("lavanderia"));
-    document.getElementById("btn--call-to-restaurante")?.addEventListener("click", startCall("restaurante"));
+    
+    modalClose?.addEventListener("click", () => {
+      if (isBusy) {
+        if (confirm("Deseja encerrar a chamada?")) {
+          socket.emit("end-call");
+          endCall();
+        }
+      } else {
+        callModal.classList.remove("modal--visible");
+      }
+    });
   </script>
 </body>
 </html>
