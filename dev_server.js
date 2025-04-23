@@ -1,16 +1,13 @@
 const fs = require("fs");
-const https = require("https");
+const http = require("http");
 const express = require("express");
 const path = require("path");
 const { Server } = require("socket.io");
-const port = 12500;
+
 const app = express();
 
 // Certificados SSL (Let’s Encrypt)
-const server = https.createServer({
-  key: fs.readFileSync("/etc/letsencrypt/live/jobsconnect.com.br/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/jobsconnect.com.br/fullchain.pem"),
-}, app);
+const server = http.createServer(app);
 
 // WebSocket com HTTPS
 const io = new Server(server);
@@ -107,6 +104,6 @@ function getSocket(role) {
 }
 
 // HTTPS na porta 5000
-server.listen(port, () => {
+server.listen(5000, () => {
   console.log("🚀 Servidor HTTPS rodando em https://jobsconnect.com.br:5000");
 });

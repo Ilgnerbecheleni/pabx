@@ -14,107 +14,455 @@
   <audio id="remoteAudio" autoplay></audio>
 
   <aside class="sidebar">
+    <div class="sidebar__logo">
+      <ion-icon name="home-outline"></ion-icon>
+      <span class="logo-text">Moteltech</span>
+    </div>
     <nav class="sidebar__navigation">
-      <div class="item active"><ion-icon name="home-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="call"></ion-icon></div>
-      <div class="item"><ion-icon name="bulb-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="snow-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="tv-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="volume-high-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="play-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="restaurant-outline"></ion-icon></div>
-      <div class="item"><ion-icon name="arrow-back-outline"></ion-icon></div>
+      <div class="item active">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="item-label">Recepção</span>
+      </div>
+      <div class="item">
+        <ion-icon name="call-outline"></ion-icon>
+        <span class="item-label">Chamadas</span>
+      </div>
+      <div class="item">
+        <ion-icon name="bulb-outline"></ion-icon>
+        <span class="item-label">Iluminação</span>
+      </div>
+      <div class="item">
+        <ion-icon name="snow-outline"></ion-icon>
+        <span class="item-label">Climatização</span>
+      </div>
+      <div class="item">
+        <ion-icon name="tv-outline"></ion-icon>
+        <span class="item-label">TV</span>
+      </div>
+      <div class="item">
+        <ion-icon name="volume-high-outline"></ion-icon>
+        <span class="item-label">Áudio</span>
+      </div>
+      <div class="item">
+        <ion-icon name="play-outline"></ion-icon>
+        <span class="item-label">Mídia</span>
+      </div>
+      <div class="item">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <span class="item-label">Restaurante</span>
+      </div>
     </nav>
+    <div class="sidebar__footer">
+      <div class="item">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span class="item-label">Sair</span>
+      </div>
+    </div>
   </aside>
 
   <main class="content">
+    <header class="content__header">
+      <div class="header__left">
+        <button class="btn btn--icon sidebar-toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <h1 class="header__title">Recepção</h1>
+      </div>
+      <div class="header__right">
+        <div class="search-bar">
+          <ion-icon name="search-outline"></ion-icon>
+          <input type="text" placeholder="Buscar suítes...">
+        </div>
+        <button class="btn btn--icon notification-btn">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <span class="user-name">Recepcionista</span>
+        </div>
+      </div>
+    </header>
+
     <div class="content__container">
-      <section class="content__generic content__profile">
-        <h2 class="content__profile--title">Moteltech</h2>
-        <h1 class="content__profile--subtitle">Medieval</h1>
-        <div class="content__profile--user">
-          <img class="user__icon" src="images/user-icon.png">
-          <p class="user__name">Recepção</p>
+      <!-- Dashboard Summary -->
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="bed-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>4</h3>
+            <p>Total de Suítes</p>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>2</h3>
+            <p>Suítes Disponíveis</p>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="people-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>2</h3>
+            <p>Suítes Ocupadas</p>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="construct-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>1</h3>
+            <p>Em Manutenção</p>
+          </div>
         </div>
       </section>
 
-      <section class="content__generic">
-        <div class="content__shortcut">
-          <div class="shortcut__box shortcut__box--suite" id="suiteCard1">
-            <div class="shortcut__box--suite__container">
-              <div class="shortcut__box--suite__identifier">
-                <h1 class="suite__identifier--number suite__status--available">01</h1>
-                <div class="suite__identifier--organizer">
-                  <p class="suite__identifier--name">BLACK</p>
+      <!-- Suites Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Suítes</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline">
+              <ion-icon name="filter-outline"></ion-icon>
+              Filtrar
+            </button>
+            <button class="btn btn--primary">
+              <ion-icon name="add-outline"></ion-icon>
+              Nova Reserva
+            </button>
+          </div>
+        </div>
+        
+        <div class="suites-grid">
+          <!-- Suite Card 1 -->
+          <div class="suite-card suite-card--available" id="suiteCard1">
+            <div class="suite-card__header">
+              <div class="suite-number">01</div>
+              <div class="suite-status">Disponível</div>
+            </div>
+            <div class="suite-card__content">
+              <h3 class="suite-name">BLACK</h3>
+              <div class="suite-details">
+                <div class="suite-detail">
+                  <ion-icon name="bed-outline"></ion-icon>
+                  <span>Cama King</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="water-outline"></ion-icon>
+                  <span>Hidromassagem</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="wifi-outline"></ion-icon>
+                  <span>Wi-Fi</span>
                 </div>
               </div>
             </div>
+            <div class="suite-card__footer">
+              <button class="btn btn--secondary btn--small">Detalhes</button>
+              <button class="btn btn--primary btn--small">Chamar</button>
+            </div>
           </div>
-
-          <div class="shortcut__box shortcut__box--suite" id="suiteCard2">
-            <div class="shortcut__box--suite__container">
-              <div class="shortcut__box--suite__identifier">
-                <h1 class="suite__identifier--number suite__status--occupied">02</h1>
-                <div class="suite__identifier--organizer">
-                  <p class="suite__identifier--name">ROYAL</p>
+          
+          <!-- Suite Card 2 -->
+          <div class="suite-card suite-card--occupied" id="suiteCard2">
+            <div class="suite-card__header">
+              <div class="suite-number">02</div>
+              <div class="suite-status">Ocupada</div>
+            </div>
+            <div class="suite-card__content">
+              <h3 class="suite-name">ROYAL</h3>
+              <div class="suite-details">
+                <div class="suite-detail">
+                  <ion-icon name="bed-outline"></ion-icon>
+                  <span>Cama Queen</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="water-outline"></ion-icon>
+                  <span>Hidromassagem</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="wifi-outline"></ion-icon>
+                  <span>Wi-Fi</span>
+                </div>
+              </div>
+              <div class="suite-occupancy">
+                <div class="occupant">
+                  <ion-icon name="person-outline"></ion-icon>
+                  <span>João Silva</span>
+                </div>
+                <div class="check-times">
+                  <div class="check-time">
+                    <ion-icon name="log-in-outline"></ion-icon>
+                    <span>14:00</span>
+                  </div>
+                  <div class="check-time">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <span>12:00</span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="suite-card__footer">
+              <button class="btn btn--secondary btn--small">Detalhes</button>
+              <button class="btn btn--primary btn--small">Chamar</button>
+            </div>
           </div>
-
-          <!-- Card Lavanderia -->
-<div class="shortcut__box shortcut__box--suite" id="lavanderiaCard">
-    <div class="shortcut__box--suite__container">
-      <div class="shortcut__box--suite__identifier">
-        <h1 class="suite__identifier--number suite__status--available">L</h1>
-        <div class="suite__identifier--organizer">
-          <p class="suite__identifier--name">LAVANDERIA</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Card Restaurante -->
-  <div class="shortcut__box shortcut__box--suite" id="restauranteCard">
-    <div class="shortcut__box--suite__container">
-      <div class="shortcut__box--suite__identifier">
-        <h1 class="suite__identifier--number suite__status--available">R</h1>
-        <div class="suite__identifier--organizer">
-          <p class="suite__identifier--name">RESTAURANTE</p>
-        </div>
-      </div>
-    </div>
-  </div>
+          
+          <!-- Suite Card 3 -->
+          <div class="suite-card suite-card--maintenance">
+            <div class="suite-card__header">
+              <div class="suite-number">03</div>
+              <div class="suite-status">Manutenção</div>
+            </div>
+            <div class="suite-card__content">
+              <h3 class="suite-name">PREMIUM</h3>
+              <div class="suite-details">
+                <div class="suite-detail">
+                  <ion-icon name="bed-outline"></ion-icon>
+                  <span>Cama King</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="water-outline"></ion-icon>
+                  <span>Hidromassagem</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="wifi-outline"></ion-icon>
+                  <span>Wi-Fi</span>
+                </div>
+              </div>
+              <div class="maintenance-info">
+                <ion-icon name="construct-outline"></ion-icon>
+                <span>Manutenção do ar-condicionado</span>
+              </div>
+            </div>
+            <div class="suite-card__footer">
+              <button class="btn btn--secondary btn--small">Detalhes</button>
+              <button class="btn btn--primary btn--small" disabled>Chamar</button>
+            </div>
+          </div>
+          
+          <!-- Suite Card 4 -->
+          <div class="suite-card suite-card--available">
+            <div class="suite-card__header">
+              <div class="suite-number">04</div>
+              <div class="suite-status">Disponível</div>
+            </div>
+            <div class="suite-card__content">
+              <h3 class="suite-name">DELUXE</h3>
+              <div class="suite-details">
+                <div class="suite-detail">
+                  <ion-icon name="bed-outline"></ion-icon>
+                  <span>Cama Super King</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="water-outline"></ion-icon>
+                  <span>Hidromassagem</span>
+                </div>
+                <div class="suite-detail">
+                  <ion-icon name="wifi-outline"></ion-icon>
+                  <span>Wi-Fi</span>
+                </div>
+              </div>
+            </div>
+            <div class="suite-card__footer">
+              <button class="btn btn--secondary btn--small">Detalhes</button>
+              <button class="btn btn--primary btn--small">Chamar</button>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="content__generic">
-        <div class="status-card">
-          <h2 class="status-card__title">Status das Suítes</h2>
-          <div class="status-card__grid">
-            <div class="status-item"><span class="status-dot status-dot--available"></span><span class="status-text">01 - BLACK</span></div>
-            <div class="status-item"><span class="status-dot status-dot--occupied"></span><span class="status-text">02 - ROYAL</span></div>
-            <div class="status-item"><span class="status-dot status-dot--maintenance"></span><span class="status-text">03 - PREMIUM</span></div>
-            <div class="status-item"><span class="status-dot status-dot--available"></span><span class="status-text">04 - DELUXE</span></div>
+      <!-- Services Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Serviços</h2>
+        </div>
+        
+        <div class="services-grid">
+          <!-- Laundry Service Card -->
+          <div class="service-card" id="lavanderiaCard">
+            <div class="service-card__icon">
+              <ion-icon name="shirt-outline"></ion-icon>
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Lavanderia</h3>
+              <p class="service-card__description">Serviços de lavagem e passadoria</p>
+              <div class="service-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Online</span>
+              </div>
+            </div>
+            <div class="service-card__footer">
+              <button class="btn btn--primary btn--full">Chamar</button>
+            </div>
           </div>
-          <div class="status-card__call">
-            <span id="callStatus" class="call-status">Status da chamada: Nenhuma</span>
+          
+          <!-- Restaurant Service Card -->
+          <div class="service-card" id="restauranteCard">
+            <div class="service-card__icon">
+              <ion-icon name="restaurant-outline"></ion-icon>
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Restaurante</h3>
+              <p class="service-card__description">Serviço de alimentação e bebidas</p>
+              <div class="service-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Online</span>
+              </div>
+            </div>
+            <div class="service-card__footer">
+              <button class="btn btn--primary btn--full">Chamar</button>
+            </div>
+          </div>
+          
+          <!-- Maintenance Service Card -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="construct-outline"></ion-icon>
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Manutenção</h3>
+              <p class="service-card__description">Serviços de reparo e manutenção</p>
+              <div class="service-card__status">
+                <span class="status-indicator status-indicator--busy"></span>
+                <span>Ocupado</span>
+              </div>
+            </div>
+            <div class="service-card__footer">
+              <button class="btn btn--primary btn--full" disabled>Chamar</button>
+            </div>
+          </div>
+          
+          <!-- Cleaning Service Card -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="sparkles-outline"></ion-icon>
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Limpeza</h3>
+              <p class="service-card__description">Serviços de limpeza e arrumação</p>
+              <div class="service-card__status">
+                <span class="status-indicator status-indicator--online"></span>
+                <span>Online</span>
+              </div>
+            </div>
+            <div class="service-card__footer">
+              <button class="btn btn--primary btn--full">Chamar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activity Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Atividades Recentes</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline">
+              <ion-icon name="calendar-outline"></ion-icon>
+              Hoje
+            </button>
+          </div>
+        </div>
+        
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <ion-icon name="log-in-outline"></ion-icon>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4>Check-in Suíte 02</h4>
+                <span class="activity-time">14:00</span>
+              </div>
+              <p class="activity-description">João Silva realizou check-in na suíte ROYAL</p>
+            </div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4>Chamada para Restaurante</h4>
+                <span class="activity-time">13:45</span>
+              </div>
+              <p class="activity-description">Suíte 02 solicitou serviço de restaurante</p>
+            </div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon">
+              <ion-icon name="construct-outline"></ion-icon>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4>Manutenção Suíte 03</h4>
+                <span class="activity-time">11:30</span>
+              </div>
+              <p class="activity-description">Iniciada manutenção do ar-condicionado</p>
+            </div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon">
+              <ion-icon name="log-out-outline"></ion-icon>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4>Check-out Suíte 04</h4>
+                <span class="activity-time">10:15</span>
+              </div>
+              <p class="activity-description">Maria Santos realizou check-out da suíte DELUXE</p>
+            </div>
           </div>
         </div>
       </section>
     </div>
   </main>
 
+  <!-- Call Modal -->
   <div class="modal modal--call" id="callModal">
     <div class="modal__container">
-        <p class="modal__status" id="callStatus">Status da chamada: <span id="callerName">Nenhuma</span></p>
-
-      <div class="modal__actions">
-        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall" style="display:none">
-          <ion-icon name="call"></ion-icon>
+      <div class="modal__header">
+        <h3 class="modal__title">Chamada</h3>
+        <button class="modal__close">
+          <ion-icon name="close-outline"></ion-icon>
         </button>
-        <button class="modal__button--icon modal__button--end" id="btnEndCall" style="display:none">
+      </div>
+      <div class="modal__content">
+        <div class="call-animation">
+          <div class="call-icon">
+            <ion-icon name="call"></ion-icon>
+          </div>
+          <div class="call-waves"></div>
+        </div>
+        <p class="modal__status" id="callStatus">Status da chamada</p>
+        <p class="caller-name" id="callerName">Nenhuma</p>
+        <div class="call-timer">00:00</div>
+      </div>
+      <div class="modal__actions">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall">
           <ion-icon name="call"></ion-icon>
+          <span>Atender</span>
+        </button>
+        <button class="modal__button--icon modal__button--end" id="btnEndCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Encerrar</span>
         </button>
       </div>
     </div>
@@ -122,28 +470,30 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    // Toggle sidebar on mobile
+    document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('sidebar--expanded');
+    });
+    
+    // VOIP Functionality
     const socket = io();
     const localAudio = document.getElementById("localAudio");
     const remoteAudio = document.getElementById("remoteAudio");
     const callModal = document.getElementById("callModal");
     const callStatus = document.getElementById("callStatus");
+    const callerName = document.getElementById("callerName");
     const btnAcceptCall = document.getElementById("btnAcceptCall");
     const btnEndCall = document.getElementById("btnEndCall");
-   
-
+    const modalClose = document.querySelector('.modal__close');
 
     let currentTarget = null;
     let stream = null;
     let isBusy = false;
+    let callTimer = null;
+    let callSeconds = 0;
 
     socket.emit("register", "reception");
     let pc = createPeerConnection();
-
-    async function setupLocalStream() {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      stream.getTracks().forEach(track => pc.addTrack(track, stream));
-      localAudio.srcObject = stream;
-    }
 
     function createPeerConnection() {
       const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
@@ -156,23 +506,46 @@
       return newPc;
     }
 
+    async function setupLocalStream() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+      localAudio.srcObject = stream;
+    }
+
     function showButtons({ accept = false, end = false }) {
-      btnAcceptCall.style.display = accept ? "inline-block" : "none";
-      btnEndCall.style.display = end ? "inline-block" : "none";
+      btnAcceptCall.style.display = accept ? "flex" : "none";
+      btnEndCall.style.display = end ? "flex" : "none";
     }
 
     function getFriendlyName(id) {
       const map = {
-        suite1: "Suíte 01",
-        suite2: "Suíte 02",
-        suite3: "Suíte 03"
+        suite1: "Suíte 01 - BLACK",
+        suite2: "Suíte 02 - ROYAL",
+        suite3: "Suíte 03 - PREMIUM",
+        lavanderia: "Lavanderia",
+        restaurante: "Restaurante"
       };
       return map[id] || id;
     }
 
+    function startCallTimer() {
+      callSeconds = 0;
+      document.querySelector('.call-timer').textContent = '00:00';
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.add('in-call');
+      
+      callTimer = setInterval(() => {
+        callSeconds++;
+        const minutes = Math.floor(callSeconds / 60);
+        const seconds = callSeconds % 60;
+        document.querySelector('.call-timer').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
     socket.on("signal", async ({ from, data }) => {
       if (data.offer) {
-        document.getElementById("callerName").textContent = `Recebendo chamada de ${getFriendlyName(from)}`;
+        callerName.textContent = getFriendlyName(from);
 
         if (isBusy) {
           socket.emit("signal", { to: from, data: { busy: true } });
@@ -180,16 +553,23 @@
         }
         currentTarget = from;
         await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
-        callStatus.textContent = `Recebendo chamada de ${getFriendlyName(from)}`;
+        callStatus.textContent = "Recebendo chamada de";
         callModal.classList.add("modal--visible");
         showButtons({ accept: true, end: true });
+        
+        // Add ringing animation
+        document.querySelector('.call-animation').classList.add('ringing');
       } else if (data.answer) {
         await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+        startCallTimer();
       } else if (data.candidate && pc.remoteDescription) {
         await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
       } else if (data.busy) {
-        callStatus.textContent = `${getFriendlyName(from)} está ocupado.`;
-        callModal.classList.remove("modal--visible");
+        callStatus.textContent = "Ocupado";
+        callerName.textContent = getFriendlyName(from);
+        setTimeout(() => {
+          callModal.classList.remove("modal--visible");
+        }, 3000);
         showButtons({ accept: false, end: false });
       }
     });
@@ -207,30 +587,44 @@
         stream = null;
       }
       callModal.classList.remove("modal--visible");
-      callStatus.textContent = "Status da chamada: Nenhuma";
+      callStatus.textContent = "Status da chamada";
+      callerName.textContent = "Nenhuma";
       showButtons({});
+      
+      if (callTimer) {
+        clearInterval(callTimer);
+        callTimer = null;
+      }
+      
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.remove('in-call');
     }
 
-    function startCall(toSuite) {
-      return async () => {
-        if (isBusy) return alert("A recepção está ocupada no momento.");
-        isBusy = true;
-        currentTarget = toSuite;
-        callStatus.textContent = `Chamando ${getFriendlyName(toSuite)}...`;
-        await setupLocalStream();
-        const offer = await pc.createOffer();
-        await pc.setLocalDescription(offer);
-        socket.emit("call", { to: currentTarget });
-        socket.emit("signal", { to: currentTarget, data: { offer } });
-        callModal.classList.add("modal--visible");
-        showButtons({ end: true });
-      };
+    async function startCall(toTarget) {
+      if (isBusy) return alert("A recepção está ocupada no momento.");
+      isBusy = true;
+      currentTarget = toTarget;
+      callStatus.textContent = "Chamando";
+      callerName.textContent = getFriendlyName(toTarget);
+      await setupLocalStream();
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socket.emit("call", { to: currentTarget });
+      socket.emit("signal", { to: currentTarget, data: { offer } });
+      callModal.classList.add("modal--visible");
+      showButtons({ end: true });
+      
+      // Add calling animation
+      document.querySelector('.call-animation').classList.add('ringing');
     }
 
-    document.getElementById("suiteCard1")?.addEventListener("click", startCall("suite1"));
-    document.getElementById("suiteCard2")?.addEventListener("click", startCall("suite2"));
-    document.getElementById("lavanderiaCard")?.addEventListener("click", startCall("lavanderia"));
-    document.getElementById("restauranteCard")?.addEventListener("click", startCall("restaurante"));
+    // Add click handlers for suite cards
+    document.getElementById("suiteCard1")?.addEventListener("click", () => startCall("suite1"));
+    document.getElementById("suiteCard2")?.addEventListener("click", () => startCall("suite2"));
+    
+    // Add click handlers for service cards
+    document.getElementById("lavanderiaCard")?.querySelector(".btn--primary").addEventListener("click", () => startCall("lavanderia"));
+    document.getElementById("restauranteCard")?.querySelector(".btn--primary").addEventListener("click", () => startCall("restaurante"));
 
     btnAcceptCall?.addEventListener("click", async () => {
       isBusy = true;
@@ -238,13 +632,40 @@
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
       socket.emit("signal", { to: currentTarget, data: { answer } });
-      callStatus.textContent = `Chamada em andamento com ${getFriendlyName(currentTarget)}`;
+      callStatus.textContent = "Chamada em andamento com";
       btnAcceptCall.style.display = "none";
+      startCallTimer();
     });
 
     btnEndCall?.addEventListener("click", () => {
       socket.emit("end-call");
       endCurrentCall();
+    });
+    
+    modalClose?.addEventListener("click", () => {
+      if (isBusy) {
+        if (confirm("Deseja encerrar a chamada?")) {
+          socket.emit("end-call");
+          endCurrentCall();
+        }
+      } else {
+        callModal.classList.remove("modal--visible");
+      }
+    });
+    
+    // Add click handlers for suite card buttons
+    document.querySelectorAll('.suite-card__footer .btn--primary').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering the parent card click
+        const card = btn.closest('.suite-card');
+        const suiteNumber = card.querySelector('.suite-number').textContent;
+        
+        if (suiteNumber === "01") {
+          startCall("suite1");
+        } else if (suiteNumber === "02") {
+          startCall("suite2");
+        }
+      });
     });
   </script>
 </body>

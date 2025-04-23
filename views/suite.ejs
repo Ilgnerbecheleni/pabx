@@ -43,6 +43,22 @@
               </div>
             </div>
           </div>
+          <div class="contact-card">
+            <h4 class="contact-card__title">Lavanderia</h4>
+            <div class="contact-card__actions">
+              <div class="action-button" id="btn--call-to-lavanderia">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h4 class="contact-card__title">Restaurante</h4>
+            <div class="contact-card__actions">
+              <div class="action-button" id="btn--call-to-restaurante">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -164,20 +180,26 @@
       endCall();
     });
 
-    document.getElementById("btn--call-to-reception")?.addEventListener("click", async () => {
-      if (isBusy) return alert("Suíte ocupada.");
-      isBusy = true;
-      currentTarget = "reception";
-      callStatus.textContent = "Chamando recepção...";
-      await setupLocalStream();
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
-      socket.emit("call", { to: currentTarget });
-      socket.emit("signal", { to: currentTarget, data: { offer } });
-      callModal.classList.add("modal--visible");
-      btnAcceptCall.style.display = "none";
-      btnEndCall.style.display = "inline-block";
-    });
+    function startCall(toTarget) {
+      return async () => {
+        if (isBusy) return alert("Suíte ocupada.");
+        isBusy = true;
+        currentTarget = toTarget;
+        callStatus.textContent = `Chamando ${toTarget}...`;
+        await setupLocalStream();
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        socket.emit("call", { to: currentTarget });
+        socket.emit("signal", { to: currentTarget, data: { offer } });
+        callModal.classList.add("modal--visible");
+        btnAcceptCall.style.display = "none";
+        btnEndCall.style.display = "inline-block";
+      };
+    }
+
+    document.getElementById("btn--call-to-reception")?.addEventListener("click", startCall("reception"));
+    document.getElementById("btn--call-to-lavanderia")?.addEventListener("click", startCall("lavanderia"));
+    document.getElementById("btn--call-to-restaurante")?.addEventListener("click", startCall("restaurante"));
   </script>
 </body>
 </html>

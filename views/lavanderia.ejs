@@ -1,415 +1,813 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
-    <link rel="stylesheet" href="css/laundry.css">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-    <title>Lavanderia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/laundry.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <title>Lavanderia</title>
 </head>
 <body>
-    <audio id="localAudio" autoplay muted></audio>
-    <audio id="remoteAudio" autoplay></audio>
-    <aside class="sidebar">
-        <nav class="sidebar__navigation">
-            <div class="item">
-                <ion-icon name="home-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="call"></ion-icon>
-            </div>
-            <div class="item active">
-                <ion-icon name="shirt-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="list-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="time-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="people-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="settings-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="arrow-back-outline"></ion-icon>
-            </div>
-        </nav>
-    </aside>
-    <main class="content">
-        <div class="content__container">
-            <section class="content__generic content__profile">
-                <h2 class="content__profile--title">Moteltech</h2>
-                <h1 class="content__profile--subtitle">Medieval</h1>
-                <div class="content__profile--user">
-                    <img class="user__icon" src="images/laundry-icon.png">
-                    <p class="user__name">Lavanderia</p>
-                </div>
-            </section>
-            
-            <!-- Service Requests Section -->
-            <section class="content__generic">
-                <div class="section__header">
-                    <h3 class="section__title">Solicitações de Serviço</h3>
-                    <div class="section__actions">
-                        <button class="btn btn--primary">
-                            <ion-icon name="add-outline"></ion-icon>
-                            Nova Solicitação
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="requests-container">
-                    <!-- Request Card 1 -->
-                    <div class="request-card request-card--new">
-                        <div class="request-card__header">
-                            <div class="request-card__suite">
-                                <span class="suite-number">01</span>
-                                <span class="suite-name">BLACK</span>
-                            </div>
-                            <div class="request-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>11:30</span>
-                            </div>
-                        </div>
-                        <div class="request-card__content">
-                            <div class="request-card__type">
-                                <ion-icon name="shirt-outline"></ion-icon>
-                                <span>Lavagem de Roupas</span>
-                            </div>
-                            <div class="request-card__details">
-                                <p>2 camisas, 1 calça, 3 peças íntimas</p>
-                                <p class="request-card__note">Obs: Cuidado com a camisa branca</p>
-                            </div>
-                        </div>
-                        <div class="request-card__footer">
-                            <div class="request-card__status">
-                                <span class="status-badge status-badge--new">Novo</span>
-                            </div>
-                            <div class="request-card__actions">
-                                <button class="btn btn--icon btn--accept">
-                                    <ion-icon name="checkmark-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Request Card 2 -->
-                    <div class="request-card request-card--processing">
-                        <div class="request-card__header">
-                            <div class="request-card__suite">
-                                <span class="suite-number">03</span>
-                                <span class="suite-name">PREMIUM</span>
-                            </div>
-                            <div class="request-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>10:45</span>
-                            </div>
-                        </div>
-                        <div class="request-card__content">
-                            <div class="request-card__type">
-                                <ion-icon name="water-outline"></ion-icon>
-                                <span>Lavagem a Seco</span>
-                            </div>
-                            <div class="request-card__details">
-                                <p>1 terno, 1 vestido de festa</p>
-                                <p class="request-card__note">Obs: Urgente para hoje à noite</p>
-                            </div>
-                        </div>
-                        <div class="request-card__footer">
-                            <div class="request-card__status">
-                                <span class="status-badge status-badge--processing">Em Processamento</span>
-                            </div>
-                            <div class="request-card__actions">
-                                <button class="btn btn--icon btn--complete">
-                                    <ion-icon name="checkmark-done-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Request Card 3 -->
-                    <div class="request-card request-card--ready">
-                        <div class="request-card__header">
-                            <div class="request-card__suite">
-                                <span class="suite-number">02</span>
-                                <span class="suite-name">ROYAL</span>
-                            </div>
-                            <div class="request-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>09:15</span>
-                            </div>
-                        </div>
-                        <div class="request-card__content">
-                            <div class="request-card__type">
-                                <ion-icon name="bed-outline"></ion-icon>
-                                <span>Troca de Roupa de Cama</span>
-                            </div>
-                            <div class="request-card__details">
-                                <p>Lençóis, fronhas e edredom</p>
-                                <p class="request-card__note">Obs: Cliente solicitou lençóis de algodão egípcio</p>
-                            </div>
-                        </div>
-                        <div class="request-card__footer">
-                            <div class="request-card__status">
-                                <span class="status-badge status-badge--ready">Pronto</span>
-                            </div>
-                            <div class="request-card__actions">
-                                <button class="btn btn--icon btn--deliver">
-                                    <ion-icon name="bicycle-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Services Section -->
-            <section class="content__generic">
-                <div class="section__header">
-                    <h3 class="section__title">Serviços Disponíveis</h3>
-                </div>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-card__icon">
-                            <ion-icon name="shirt-outline"></ion-icon>
-                        </div>
-                        <h4 class="service-card__title">Lavagem de Roupas</h4>
-                        <p class="service-card__description">Lavagem comum de roupas com produtos de alta qualidade.</p>
-                        <div class="service-card__details">
-                            <div class="service-card__price">
-                                <span>A partir de</span>
-                                <span class="price">R$ 15,00</span>
-                            </div>
-                            <div class="service-card__time">
-                                <span>Tempo estimado:</span>
-                                <span>2-3 horas</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-card__icon">
-                            <ion-icon name="water-outline"></ion-icon>
-                        </div>
-                        <h4 class="service-card__title">Lavagem a Seco</h4>
-                        <p class="service-card__description">Ideal para roupas delicadas e tecidos especiais.</p>
-                        <div class="service-card__details">
-                            <div class="service-card__price">
-                                <span>A partir de</span>
-                                <span class="price">R$ 30,00</span>
-                            </div>
-                            <div class="service-card__time">
-                                <span>Tempo estimado:</span>
-                                <span>4-5 horas</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-card__icon">
-                            <ion-icon name="bed-outline"></ion-icon>
-                        </div>
-                        <h4 class="service-card__title">Troca de Roupa de Cama</h4>
-                        <p class="service-card__description">Troca completa de lençóis, fronhas e edredom.</p>
-                        <div class="service-card__details">
-                            <div class="service-card__price">
-                                <span>A partir de</span>
-                                <span class="price">R$ 50,00</span>
-                            </div>
-                            <div class="service-card__time">
-                                <span>Tempo estimado:</span>
-                                <span>30 minutos</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-card__icon">
-                            <ion-icon name="iron-outline"></ion-icon>
-                        </div>
-                        <h4 class="service-card__title">Passadoria</h4>
-                        <p class="service-card__description">Serviço de passar roupas com acabamento profissional.</p>
-                        <div class="service-card__details">
-                            <div class="service-card__price">
-                                <span>A partir de</span>
-                                <span class="price">R$ 10,00</span>
-                            </div>
-                            <div class="service-card__time">
-                                <span>Tempo estimado:</span>
-                                <span>1-2 horas</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Statistics Section -->
-            <section class="content__generic">
-                <div class="section__header">
-                    <h3 class="section__title">Estatísticas</h3>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-card__icon">
-                            <ion-icon name="today-outline"></ion-icon>
-                        </div>
-                        <div class="stat-card__content">
-                            <h4 class="stat-card__title">Hoje</h4>
-                            <p class="stat-card__value">12</p>
-                            <p class="stat-card__label">Solicitações</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-card__icon">
-                            <ion-icon name="hourglass-outline"></ion-icon>
-                        </div>
-                        <div class="stat-card__content">
-                            <h4 class="stat-card__title">Pendentes</h4>
-                            <p class="stat-card__value">5</p>
-                            <p class="stat-card__label">Solicitações</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-card__icon">
-                            <ion-icon name="checkmark-done-outline"></ion-icon>
-                        </div>
-                        <div class="stat-card__content">
-                            <h4 class="stat-card__title">Concluídas</h4>
-                            <p class="stat-card__value">7</p>
-                            <p class="stat-card__label">Solicitações</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-card__icon">
-                            <ion-icon name="time-outline"></ion-icon>
-                        </div>
-                        <div class="stat-card__content">
-                            <h4 class="stat-card__title">Tempo Médio</h4>
-                            <p class="stat-card__value">2.5h</p>
-                            <p class="stat-card__label">Por Serviço</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <!-- Call Modal -->
-    <div class="modal modal--call" id="callModal">
-        <div class="modal__container">
-            <p class="modal__status">Recebendo chamada de suíte Black...</p>
-            <div class="modal__actions">
-                <button class="modal__button--icon modal__button--accept">
-                    <ion-icon name="call"></ion-icon>
-                </button>
-                <button class="modal__button--icon modal__button--end">
-                    <ion-icon name="call"></ion-icon>
-                </button>
-            </div>
-        </div>
+  <audio id="localAudio" autoplay muted></audio>
+  <audio id="remoteAudio" autoplay></audio>
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <ion-icon name="shirt-outline"></ion-icon>
+      <span class="logo-text">Moteltech</span>
     </div>
-    
-    <!-- New Request Modal -->
-    <dialog id="newRequestModal" class="modal">
-        <div class="modal-content">
-            <div class="close-btn" id="closeRequestModal">✕</div>
-            
-            <div class="modal-header">
-                <h3 class="modal-title">Nova Solicitação</h3>
-            </div>
-            
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="suiteSelect">Suíte</label>
-                    <select id="suiteSelect" class="form-control">
-                        <option value="1">01 - BLACK</option>
-                        <option value="2">02 - ROYAL</option>
-                        <option value="3">03 - PREMIUM</option>
-                        <option value="4">04 - DELUXE</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="serviceType">Tipo de Serviço</label>
-                    <select id="serviceType" class="form-control">
-                        <option value="">Selecione um serviço</option>
-                        <option value="laundry">Lavagem de Roupas</option>
-                        <option value="dry-cleaning">Lavagem a Seco</option>
-                        <option value="bedding">Troca de Roupa de Cama</option>
-                        <option value="ironing">Passadoria</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="requestDetails">Detalhes</label>
-                    <textarea id="requestDetails" class="form-control" rows="3" placeholder="Descreva os itens e detalhes do serviço..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="requestNotes">Observações</label>
-                    <textarea id="requestNotes" class="form-control" rows="2" placeholder="Observações especiais para o serviço..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="urgencyLevel">Nível de Urgência</label>
-                    <select id="urgencyLevel" class="form-control">
-                        <option value="normal">Normal</option>
-                        <option value="urgent">Urgente</option>
-                        <option value="very-urgent">Muito Urgente</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <button class="btn btn--secondary" id="cancelRequestBtn">Cancelar</button>
-                <button class="btn btn--primary" id="saveRequestBtn">Salvar Solicitação</button>
-            </div>
+    <nav class="sidebar__navigation">
+      <div class="item active">
+        <ion-icon name="shirt-outline"></ion-icon>
+        <span class="item-label">Lavanderia</span>
+      </div>
+      <div class="item" id="btn--call-to-reception">
+        <ion-icon name="call-outline"></ion-icon>
+        <span class="item-label">Recepção</span>
+        <span class="tooltip">Chamar Recepção</span>
+      </div>
+      <div class="item" id="btn--call-to-restaurante">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <span class="item-label">Restaurante</span>
+        <span class="tooltip">Chamar Restaurante</span>
+      </div>
+      <div class="item">
+        <ion-icon name="time-outline"></ion-icon>
+        <span class="item-label">Histórico</span>
+      </div>
+      <div class="item">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="item-label">Configurações</span>
+      </div>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="item">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span class="item-label">Sair</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content__header">
+      <div class="header__left">
+        <button class="btn btn--icon sidebar-toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <h1 class="header__title">Lavanderia</h1>
+      </div>
+      <div class="header__right">
+        <div class="search-bar">
+          <ion-icon name="search-outline"></ion-icon>
+          <input type="text" placeholder="Buscar solicitações...">
         </div>
-    </dialog>
+        <button class="btn btn--icon notification-btn">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span class="notification-badge">2</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <span class="user-name">Atendente</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content__container">
+      <!-- Dashboard Summary -->
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="shirt-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>15</h3>
+            <p>Solicitações Hoje</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>12%</span>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>6</h3>
+            <p>Em Processamento</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>5%</span>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>9</h3>
+            <p>Concluídas</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>8%</span>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="timer-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>2.5h</h3>
+            <p>Tempo Médio</p>
+          </div>
+          <div class="summary-trend down">
+            <ion-icon name="arrow-down-outline"></ion-icon>
+            <span>10%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Service Requests Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Solicitações de Serviço</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline">
+              <ion-icon name="filter-outline"></ion-icon>
+              Filtrar
+            </button>
+            <button class="btn btn--primary" id="btn-new-request">
+              <ion-icon name="add-outline"></ion-icon>
+              Nova Solicitação
+            </button>
+          </div>
+        </div>
+        
+        <div class="requests-container">
+          <!-- Request Card 1 -->
+          <div class="request-card request-card--new">
+            <div class="request-card__header">
+              <div class="request-card__suite">
+                <span class="suite-number">01</span>
+                <span class="suite-name">BLACK</span>
+              </div>
+              <div class="request-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>11:30</span>
+              </div>
+            </div>
+            <div class="request-card__content">
+              <div class="request-card__type">
+                <ion-icon name="shirt-outline"></ion-icon>
+                <span>Lavagem de Roupas</span>
+              </div>
+              <div class="request-card__details">
+                <p>2 camisas, 1 calça, 3 peças íntimas</p>
+                <p class="request-card__note">Obs: Cuidado com a camisa branca</p>
+              </div>
+              <div class="request-card__urgency">
+                <span class="urgency-badge urgency-badge--normal">Normal</span>
+              </div>
+            </div>
+            <div class="request-card__footer">
+              <div class="request-card__status">
+                <span class="status-badge status-badge--new">Novo</span>
+              </div>
+              <div class="request-card__actions">
+                <button class="btn btn--icon btn--accept">
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Request Card 2 -->
+          <div class="request-card request-card--processing">
+            <div class="request-card__header">
+              <div class="request-card__suite">
+                <span class="suite-number">03</span>
+                <span class="suite-name">PREMIUM</span>
+              </div>
+              <div class="request-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>10:45</span>
+              </div>
+            </div>
+            <div class="request-card__content">
+              <div class="request-card__type">
+                <ion-icon name="water-outline"></ion-icon>
+                <span>Lavagem a Seco</span>
+              </div>
+              <div class="request-card__details">
+                <p>1 terno, 1 vestido de festa</p>
+                <p class="request-card__note">Obs: Urgente para hoje à noite</p>
+              </div>
+              <div class="request-card__urgency">
+                <span class="urgency-badge urgency-badge--urgent">Urgente</span>
+              </div>
+            </div>
+            <div class="request-card__footer">
+              <div class="request-card__status">
+                <span class="status-badge status-badge--processing">Em Processamento</span>
+              </div>
+              <div class="request-card__actions">
+                <button class="btn btn--icon btn--complete">
+                  <ion-icon name="checkmark-done-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Request Card 3 -->
+          <div class="request-card request-card--ready">
+            <div class="request-card__header">
+              <div class="request-card__suite">
+                <span class="suite-number">02</span>
+                <span class="suite-name">ROYAL</span>
+              </div>
+              <div class="request-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>09:15</span>
+              </div>
+            </div>
+            <div class="request-card__content">
+              <div class="request-card__type">
+                <ion-icon name="bed-outline"></ion-icon>
+                <span>Troca de Roupa de Cama</span>
+              </div>
+              <div class="request-card__details">
+                <p>Lençóis, fronhas e edredom</p>
+                <p class="request-card__note">Obs: Cliente solicitou lençóis de algodão egípcio</p>
+              </div>
+              <div class="request-card__urgency">
+                <span class="urgency-badge urgency-badge--normal">Normal</span>
+              </div>
+            </div>
+            <div class="request-card__footer">
+              <div class="request-card__status">
+                <span class="status-badge status-badge--ready">Pronto</span>
+              </div>
+              <div class="request-card__actions">
+                <button class="btn btn--icon btn--deliver">
+                  <ion-icon name="bicycle-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Serviços Disponíveis</h2>
+          <div class="section__actions">
+            <button class="btn btn--secondary">
+              <ion-icon name="create-outline"></ion-icon>
+              Editar Serviços
+            </button>
+          </div>
+        </div>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="shirt-outline"></ion-icon>
+            </div>
+            <h4 class="service-card__title">Lavagem de Roupas</h4>
+            <p class="service-card__description">Lavagem comum de roupas com produtos de alta qualidade.</p>
+            <div class="service-card__details">
+              <div class="service-card__price">
+                <span>A partir de</span>
+                <span class="price">R$ 15,00</span>
+              </div>
+              <div class="service-card__time">
+                <span>Tempo estimado:</span>
+                <span>2-3 horas</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--full">Solicitar</button>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="water-outline"></ion-icon>
+            </div>
+            <h4 class="service-card__title">Lavagem a Seco</h4>
+            <p class="service-card__description">Ideal para roupas delicadas e tecidos especiais.</p>
+            <div class="service-card__details">
+              <div class="service-card__price">
+                <span>A partir de</span>
+                <span class="price">R$ 30,00</span>
+              </div>
+              <div class="service-card__time">
+                <span>Tempo estimado:</span>
+                <span>4-5 horas</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--full">Solicitar</button>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="bed-outline"></ion-icon>
+            </div>
+            <h4 class="service-card__title">Troca de Roupa de Cama</h4>
+            <p class="service-card__description">Troca completa de lençóis, fronhas e edredom.</p>
+            <div class="service-card__details">
+              <div class="service-card__price">
+                <span>A partir de</span>
+                <span class="price">R$ 50,00</span>
+              </div>
+              <div class="service-card__time">
+                <span>Tempo estimado:</span>
+                <span>30 minutos</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--full">Solicitar</button>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-card__icon">
+              <ion-icon name="flash-outline"></ion-icon>
+            </div>
+            <h4 class="service-card__title">Passadoria</h4>
+            <p class="service-card__description">Serviço de passar roupas com acabamento profissional.</p>
+            <div class="service-card__details">
+              <div class="service-card__price">
+                <span>A partir de</span>
+                <span class="price">R$ 10,00</span>
+              </div>
+              <div class="service-card__time">
+                <span>Tempo estimado:</span>
+                <span>1-2 horas</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--full">Solicitar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inventory Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Estoque de Suprimentos</h2>
+          <div class="section__actions">
+            <button class="btn btn--secondary">
+              <ion-icon name="add-outline"></ion-icon>
+              Adicionar Item
+            </button>
+          </div>
+        </div>
+        
+        <div class="inventory-table-container">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Categoria</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Detergente Líquido</td>
+                <td>Produtos de Limpeza</td>
+                <td>25 litros</td>
+                <td><span class="inventory-status inventory-status--ok">OK</span></td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Amaciante</td>
+                <td>Produtos de Limpeza</td>
+                <td>15 litros</td>
+                <td><span class="inventory-status inventory-status--ok">OK</span></td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Alvejante</td>
+                <td>Produtos de Limpeza</td>
+                <td>5 litros</td>
+                <td><span class="inventory-status inventory-status--low">Baixo</span></td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Cabides</td>
+                <td>Acessórios</td>
+                <td>120 unidades</td>
+                <td><span class="inventory-status inventory-status--ok">OK</span></td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Sacos para Roupa</td>
+                <td>Acessórios</td>
+                <td>30 unidades</td>
+                <td><span class="inventory-status inventory-status--low">Baixo</span></td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <button class="btn btn--icon btn--small">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Call Modal -->
+  <div class="modal modal--call" id="callModal">
+    <div class="modal__container">
+      <div class="modal__header">
+        <h3 class="modal__title">Chamada</h3>
+        <button class="modal__close">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="modal__content">
+        <div class="call-animation">
+          <div class="call-icon">
+            <ion-icon name="call"></ion-icon>
+          </div>
+          <div class="call-waves"></div>
+        </div>
+        <p class="modal__status" id="callStatus">Status da chamada</p>
+        <div class="call-timer">00:00</div>
+      </div>
+      <div class="modal__actions">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Atender</span>
+        </button>
+        <button class="modal__button--icon modal__button--end" id="btnEndCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Encerrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Request Modal -->
+  <div class="modal" id="newRequestModal">
+    <div class="modal__container modal__container--large">
+      <div class="modal__header">
+        <h3 class="modal__title">Nova Solicitação</h3>
+        <button class="modal__close" id="closeRequestModal">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="modal__content">
+        <div class="form-group">
+          <label for="suiteSelect">Suíte</label>
+          <select id="suiteSelect" class="form-control">
+            <option value="1">01 - BLACK</option>
+            <option value="2">02 - ROYAL</option>
+            <option value="3">03 - PREMIUM</option>
+            <option value="4">04 - DELUXE</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="serviceType">Tipo de Serviço</label>
+          <select id="serviceType" class="form-control">
+            <option value="">Selecione um serviço</option>
+            <option value="laundry">Lavagem de Roupas</option>
+            <option value="dry-cleaning">Lavagem a Seco</option>
+            <option value="bedding">Troca de Roupa de Cama</option>
+            <option value="ironing">Passadoria</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="requestDetails">Detalhes</label>
+          <textarea id="requestDetails" class="form-control" rows="3" placeholder="Descreva os itens e detalhes do serviço..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="requestNotes">Observações</label>
+          <textarea id="requestNotes" class="form-control" rows="2" placeholder="Observações especiais para o serviço..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="urgencyLevel">Nível de Urgência</label>
+          <select id="urgencyLevel" class="form-control">
+            <option value="normal">Normal</option>
+            <option value="urgent">Urgente</option>
+            <option value="very-urgent">Muito Urgente</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" id="cancelRequestBtn">Cancelar</button>
+        <button class="btn btn--primary" id="saveRequestBtn">Salvar Solicitação</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Toggle sidebar on mobile
+    document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('sidebar--expanded');
+    });
     
-    <script>
-        // Open new request modal
-        document.querySelector('.btn--primary').addEventListener('click', () => {
-            document.getElementById('newRequestModal').showModal();
-        });
+    // New Request Modal
+    const newRequestModal = document.getElementById('newRequestModal');
+    const btnNewRequest = document.getElementById('btn-new-request');
+    const closeRequestModal = document.getElementById('closeRequestModal');
+    const cancelRequestBtn = document.getElementById('cancelRequestBtn');
+    
+    btnNewRequest.addEventListener('click', () => {
+      newRequestModal.classList.add('modal--visible');
+    });
+    
+    closeRequestModal.addEventListener('click', () => {
+      newRequestModal.classList.remove('modal--visible');
+    });
+    
+    cancelRequestBtn.addEventListener('click', () => {
+      newRequestModal.classList.remove('modal--visible');
+    });
+    
+    // Service card buttons
+    document.querySelectorAll('.service-card .btn--primary').forEach(btn => {
+      btn.addEventListener('click', () => {
+        newRequestModal.classList.add('modal--visible');
+        // Pre-select the service type based on the clicked service
+        const serviceTitle = btn.closest('.service-card').querySelector('.service-card__title').textContent;
+        const serviceSelect = document.getElementById('serviceType');
         
-        // Close new request modal
-        document.getElementById('closeRequestModal').addEventListener('click', () => {
-            document.getElementById('newRequestModal').close();
-        });
-        
-        document.getElementById('cancelRequestBtn').addEventListener('click', () => {
-            document.getElementById('newRequestModal').close();
-        });
-        
-        // Show call modal (for demo purposes)
+        for (let i = 0; i < serviceSelect.options.length; i++) {
+          if (serviceSelect.options[i].text === serviceTitle) {
+            serviceSelect.selectedIndex = i;
+            break;
+          }
+        }
+      });
+    });
+    
+    // VOIP Functionality
+    const socket = io();
+    const localAudio = document.getElementById("localAudio");
+    const remoteAudio = document.getElementById("remoteAudio");
+    const callModal = document.getElementById("callModal");
+    const callStatus = document.getElementById("callStatus");
+    const btnAcceptCall = document.getElementById("btnAcceptCall");
+    const btnEndCall = document.getElementById("btnEndCall");
+    const modalClose = document.querySelector('.modal__close');
+
+    let currentTarget = null;
+    let isBusy = false;
+    let stream = null;
+    let offer = null;
+    let pc = createPeerConnection();
+    let callTimer = null;
+    let callSeconds = 0;
+
+    socket.emit("register", "lavanderia");
+
+    function createPeerConnection() {
+      const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+      newPc.ontrack = event => { remoteAudio.srcObject = event.streams[0]; };
+      newPc.onicecandidate = event => {
+        if (event.candidate && currentTarget) {
+          socket.emit("signal", { to: currentTarget, data: { candidate: event.candidate } });
+        }
+      };
+      return newPc;
+    }
+
+    async function setupLocalStream() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+      localAudio.srcObject = stream;
+    }
+
+    socket.on("call", async ({ from }) => {
+      if (isBusy) {
+        socket.emit("signal", { to: from, data: { busy: true } });
+        return;
+      }
+      currentTarget = from;
+      callStatus.textContent = `Recebendo chamada de ${from}`;
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "flex";
+      btnEndCall.style.display = "flex";
+      
+      // Add ringing animation
+      document.querySelector('.call-animation').classList.add('ringing');
+    });
+
+    socket.on("signal", async ({ from, data }) => {
+      if (data.offer) {
+        offer = data.offer;
+      } else if (data.answer) {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+        startCallTimer();
+      } else if (data.candidate && pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+      } else if (data.busy) {
+        callStatus.textContent = `${from} está ocupado.`;
         setTimeout(() => {
-            document.getElementById('callModal').classList.add('modal--visible');
-            
-            // Hide after 5 seconds
-            setTimeout(() => {
-                document.getElementById('callModal').classList.remove('modal--visible');
-            }, 5000);
-        }, 15000);
-    </script>
+          callModal.classList.remove("modal--visible");
+        }, 3000);
+        btnAcceptCall.style.display = "none";
+        btnEndCall.style.display = "flex";
+      }
+    });
+
+    socket.on("end-call", () => {
+      endCall();
+    });
+
+    function startCallTimer() {
+      callSeconds = 0;
+      document.querySelector('.call-timer').textContent = '00:00';
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.add('in-call');
+      
+      callTimer = setInterval(() => {
+        callSeconds++;
+        const minutes = Math.floor(callSeconds / 60);
+        const seconds = callSeconds % 60;
+        document.querySelector('.call-timer').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function endCall() {
+      isBusy = false;
+      pc.close();
+      pc = createPeerConnection();
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      callModal.classList.remove("modal--visible");
+      callStatus.textContent = "Status da chamada";
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "none";
+      offer = null;
+      
+      if (callTimer) {
+        clearInterval(callTimer);
+        callTimer = null;
+      }
+      
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.remove('in-call');
+    }
+
+    btnAcceptCall?.addEventListener("click", async () => {
+      if (!offer) return;
+      isBusy = true;
+      await setupLocalStream();
+      await pc.setRemoteDescription(new RTCSessionDescription(offer));
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      socket.emit("signal", { to: currentTarget, data: { answer } });
+      callStatus.textContent = `Chamada em andamento com ${currentTarget}`;
+      btnAcceptCall.style.display = "none";
+      startCallTimer();
+    });
+
+    btnEndCall?.addEventListener("click", () => {
+      socket.emit("end-call");
+      endCall();
+    });
+    
+    modalClose?.addEventListener("click", () => {
+      if (isBusy) {
+        if (confirm("Deseja encerrar a chamada?")) {
+          socket.emit("end-call");
+          endCall();
+        }
+      } else {
+        callModal.classList.remove("modal--visible");
+      }
+    });
+
+    async function startCall(to) {
+      if (isBusy) return alert("Lavanderia ocupada.");
+      isBusy = true;
+      currentTarget = to;
+      callStatus.textContent = `Chamando ${to}...`;
+      await setupLocalStream();
+      const offerDescription = await pc.createOffer();
+      await pc.setLocalDescription(offerDescription);
+      socket.emit("call", { to });
+      socket.emit("signal", { to, data: { offer: offerDescription } });
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "flex";
+      
+      // Add calling animation
+      document.querySelector('.call-animation').classList.add('ringing');
+    }
+
+    document.getElementById("btn--call-to-reception")?.addEventListener("click", () => startCall("reception"));
+    document.getElementById("btn--call-to-restaurante")?.addEventListener("click", () => startCall("restaurante"));
+    
+    // Add click handlers for request action buttons
+    document.querySelectorAll('.btn--accept').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.request-card');
+        card.classList.remove('request-card--new');
+        card.classList.add('request-card--processing');
+        const statusBadge = card.querySelector('.status-badge');
+        statusBadge.className = 'status-badge status-badge--processing';
+        statusBadge.textContent = 'Em Processamento';
+        this.innerHTML = '<ion-icon name="checkmark-done-outline"></ion-icon>';
+        this.classList.remove('btn--accept');
+        this.classList.add('btn--complete');
+      });
+    });
+    
+    document.querySelectorAll('.btn--complete').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.request-card');
+        card.classList.remove('request-card--processing');
+        card.classList.add('request-card--ready');
+        const statusBadge = card.querySelector('.status-badge');
+        statusBadge.className = 'status-badge status-badge--ready';
+        statusBadge.textContent = 'Pronto';
+        this.innerHTML = '<ion-icon name="bicycle-outline"></ion-icon>';
+        this.classList.remove('btn--complete');
+        this.classList.add('btn--deliver');
+      });
+    });
+    
+    document.querySelectorAll('.btn--deliver').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.request-card');
+        card.style.opacity = '0';
+        setTimeout(() => {
+          card.remove();
+        }, 300);
+      });
+    });
+  </script>
 </body>
 </html>

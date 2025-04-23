@@ -1,377 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
-    <link rel="stylesheet" href="css/restaurant.css">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-    <title>Restaurante</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/restaurant.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <title>Restaurante</title>
 </head>
 <body>
-    <audio id="localAudio" autoplay muted></audio>
-    <audio id="remoteAudio" autoplay></audio>
-    <aside class="sidebar">
-        <nav class="sidebar__navigation">
-            <div class="item">
-                <ion-icon name="home-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="call"></ion-icon>
-            </div>
-            <div class="item active">
-                <ion-icon name="restaurant-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="list-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="time-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="people-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="settings-outline"></ion-icon>
-            </div>
-            <div class="item">
-                <ion-icon name="arrow-back-outline"></ion-icon>
-            </div>
-        </nav>
-    </aside>
-    <main class="content">
-        <div class="content__container">
-            <section class="content__generic content__profile">
-                <h2 class="content__profile--title">Moteltech</h2>
-                <h1 class="content__profile--subtitle">Medieval</h1>
-                <div class="content__profile--user">
-                    <img class="user__icon" src="images/chef-icon.png">
-                    <p class="user__name">Restaurante</p>
-                </div>
-            </section>
-            
-            <!-- Orders Section -->
-            <section class="content__generic">
-                <div class="section__header">
-                    <h3 class="section__title">Pedidos Ativos</h3>
-                    <div class="section__actions">
-                        <button class="btn btn--primary">
-                            <ion-icon name="add-outline"></ion-icon>
-                            Novo Pedido
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="orders-container">
-                    <!-- Order Card 1 -->
-                    <div class="order-card order-card--new">
-                        <div class="order-card__header">
-                            <div class="order-card__suite">
-                                <span class="suite-number">01</span>
-                                <span class="suite-name">BLACK</span>
-                            </div>
-                            <div class="order-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>10:30</span>
-                            </div>
-                        </div>
-                        <div class="order-card__items">
-                            <div class="order-item">
-                                <span class="order-item__quantity">1x</span>
-                                <span class="order-item__name">Hambúrguer Especial</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">2x</span>
-                                <span class="order-item__name">Batata Frita</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">2x</span>
-                                <span class="order-item__name">Refrigerante Cola</span>
-                            </div>
-                        </div>
-                        <div class="order-card__footer">
-                            <div class="order-card__status">
-                                <span class="status-badge status-badge--new">Novo</span>
-                            </div>
-                            <div class="order-card__actions">
-                                <button class="btn btn--icon btn--accept">
-                                    <ion-icon name="checkmark-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Order Card 2 -->
-                    <div class="order-card order-card--preparing">
-                        <div class="order-card__header">
-                            <div class="order-card__suite">
-                                <span class="suite-number">03</span>
-                                <span class="suite-name">PREMIUM</span>
-                            </div>
-                            <div class="order-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>10:15</span>
-                            </div>
-                        </div>
-                        <div class="order-card__items">
-                            <div class="order-item">
-                                <span class="order-item__quantity">2x</span>
-                                <span class="order-item__name">Filé Mignon</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">1x</span>
-                                <span class="order-item__name">Salada Caesar</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">1x</span>
-                                <span class="order-item__name">Vinho Tinto</span>
-                            </div>
-                        </div>
-                        <div class="order-card__footer">
-                            <div class="order-card__status">
-                                <span class="status-badge status-badge--preparing">Preparando</span>
-                            </div>
-                            <div class="order-card__actions">
-                                <button class="btn btn--icon btn--complete">
-                                    <ion-icon name="checkmark-done-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Order Card 3 -->
-                    <div class="order-card order-card--ready">
-                        <div class="order-card__header">
-                            <div class="order-card__suite">
-                                <span class="suite-number">02</span>
-                                <span class="suite-name">ROYAL</span>
-                            </div>
-                            <div class="order-card__time">
-                                <ion-icon name="time-outline"></ion-icon>
-                                <span>10:05</span>
-                            </div>
-                        </div>
-                        <div class="order-card__items">
-                            <div class="order-item">
-                                <span class="order-item__quantity">2x</span>
-                                <span class="order-item__name">Pizza Margherita</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">1x</span>
-                                <span class="order-item__name">Tiramisu</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="order-item__quantity">2x</span>
-                                <span class="order-item__name">Água Mineral</span>
-                            </div>
-                        </div>
-                        <div class="order-card__footer">
-                            <div class="order-card__status">
-                                <span class="status-badge status-badge--ready">Pronto</span>
-                            </div>
-                            <div class="order-card__actions">
-                                <button class="btn btn--icon btn--deliver">
-                                    <ion-icon name="bicycle-outline"></ion-icon>
-                                </button>
-                                <button class="btn btn--icon btn--call">
-                                    <ion-icon name="call-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Menu Section -->
-            <section class="content__generic">
-                <div class="section__header">
-                    <h3 class="section__title">Menu do Dia</h3>
-                    <div class="section__actions">
-                        <button class="btn btn--secondary">
-                            <ion-icon name="create-outline"></ion-icon>
-                            Editar Menu
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="menu-container">
-                    <div class="menu-category">
-                        <h4 class="menu-category__title">Entradas</h4>
-                        <div class="menu-items">
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Bruschetta</h5>
-                                    <p class="menu-item__description">Pão italiano com tomate, alho e manjericão</p>
-                                </div>
-                                <div class="menu-item__price">R$ 25,00</div>
-                            </div>
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Carpaccio</h5>
-                                    <p class="menu-item__description">Finas fatias de carne com molho especial</p>
-                                </div>
-                                <div class="menu-item__price">R$ 35,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-category">
-                        <h4 class="menu-category__title">Pratos Principais</h4>
-                        <div class="menu-items">
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Filé Mignon</h5>
-                                    <p class="menu-item__description">Filé grelhado com molho de vinho tinto</p>
-                                </div>
-                                <div class="menu-item__price">R$ 75,00</div>
-                            </div>
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Salmão Grelhado</h5>
-                                    <p class="menu-item__description">Salmão com ervas e limão</p>
-                                </div>
-                                <div class="menu-item__price">R$ 65,00</div>
-                            </div>
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Risoto de Funghi</h5>
-                                    <p class="menu-item__description">Arroz arbóreo com cogumelos frescos</p>
-                                </div>
-                                <div class="menu-item__price">R$ 55,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-category">
-                        <h4 class="menu-category__title">Sobremesas</h4>
-                        <div class="menu-items">
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Tiramisu</h5>
-                                    <p class="menu-item__description">Clássica sobremesa italiana</p>
-                                </div>
-                                <div class="menu-item__price">R$ 30,00</div>
-                            </div>
-                            <div class="menu-item">
-                                <div class="menu-item__info">
-                                    <h5 class="menu-item__name">Petit Gateau</h5>
-                                    <p class="menu-item__description">Bolo de chocolate com centro derretido</p>
-                                </div>
-                                <div class="menu-item__price">R$ 35,00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <!-- Call Modal -->
-    <div class="modal modal--call" id="callModal">
-        <div class="modal__container">
-            <p class="modal__status">Recebendo chamada de suíte Black...</p>
-            <div class="modal__actions">
-                <button class="modal__button--icon modal__button--accept">
-                    <ion-icon name="call"></ion-icon>
-                </button>
-                <button class="modal__button--icon modal__button--end">
-                    <ion-icon name="call"></ion-icon>
-                </button>
-            </div>
-        </div>
+  <audio id="localAudio" autoplay muted></audio>
+  <audio id="remoteAudio" autoplay></audio>
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <ion-icon name="restaurant-outline"></ion-icon>
+      <span class="logo-text">Moteltech</span>
     </div>
-    
-    <!-- New Order Modal -->
-    <dialog id="newOrderModal" class="modal">
-        <div class="modal-content">
-            <div class="close-btn" id="closeOrderModal">✕</div>
-            
-            <div class="modal-header">
-                <h3 class="modal-title">Novo Pedido</h3>
-            </div>
-            
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="suiteSelect">Suíte</label>
-                    <select id="suiteSelect" class="form-control">
-                        <option value="1">01 - BLACK</option>
-                        <option value="2">02 - ROYAL</option>
-                        <option value="3">03 - PREMIUM</option>
-                        <option value="4">04 - DELUXE</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Itens do Pedido</label>
-                    <div class="order-builder">
-                        <div class="order-builder__item">
-                            <select class="form-control">
-                                <option value="">Selecione um item</option>
-                                <option value="bruschetta">Bruschetta</option>
-                                <option value="carpaccio">Carpaccio</option>
-                                <option value="file">Filé Mignon</option>
-                                <option value="salmao">Salmão Grelhado</option>
-                                <option value="risoto">Risoto de Funghi</option>
-                                <option value="tiramisu">Tiramisu</option>
-                                <option value="petit">Petit Gateau</option>
-                            </select>
-                            <input type="number" class="form-control form-control--small" min="1" value="1">
-                            <button class="btn btn--icon btn--remove">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </div>
-                        
-                        <button class="btn btn--secondary btn--small btn--add-item">
-                            <ion-icon name="add-outline"></ion-icon>
-                            Adicionar Item
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orderNotes">Observações</label>
-                    <textarea id="orderNotes" class="form-control" rows="3" placeholder="Observações especiais para o pedido..."></textarea>
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <button class="btn btn--secondary" id="cancelOrderBtn">Cancelar</button>
-                <button class="btn btn--primary" id="saveOrderBtn">Salvar Pedido</button>
-            </div>
+    <nav class="sidebar__navigation">
+      <div class="item active">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        <span class="item-label">Restaurante</span>
+      </div>
+      <div class="item" id="btn--call-to-reception">
+        <ion-icon name="call-outline"></ion-icon>
+        <span class="item-label">Recepção</span>
+        <span class="tooltip">Chamar Recepção</span>
+      </div>
+      <div class="item" id="btn--call-to-lavanderia">
+        <ion-icon name="shirt-outline"></ion-icon>
+        <span class="item-label">Lavanderia</span>
+        <span class="tooltip">Chamar Lavanderia</span>
+      </div>
+      <div class="item">
+        <ion-icon name="time-outline"></ion-icon>
+        <span class="item-label">Histórico</span>
+      </div>
+      <div class="item">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="item-label">Configurações</span>
+      </div>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="item">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span class="item-label">Sair</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="content__header">
+      <div class="header__left">
+        <button class="btn btn--icon sidebar-toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <h1 class="header__title">Restaurante</h1>
+      </div>
+      <div class="header__right">
+        <div class="search-bar">
+          <ion-icon name="search-outline"></ion-icon>
+          <input type="text" placeholder="Buscar pedidos...">
         </div>
-    </dialog>
-    
-    <script>
-        // Open new order modal
-        document.querySelector('.btn--primary').addEventListener('click', () => {
-            document.getElementById('newOrderModal').showModal();
-        });
+        <button class="btn btn--icon notification-btn">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <span class="user-name">Atendente</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content__container">
+      <!-- Dashboard Summary -->
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="restaurant-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>12</h3>
+            <p>Pedidos Hoje</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>8%</span>
+          </div>
+        </div>
         
-        // Close new order modal
-        document.getElementById('closeOrderModal').addEventListener('click', () => {
-            document.getElementById('newOrderModal').close();
-        });
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>5</h3>
+            <p>Pedidos Pendentes</p>
+          </div>
+          <div class="summary-trend down">
+            <ion-icon name="arrow-down-outline"></ion-icon>
+            <span>3%</span>
+          </div>
+        </div>
         
-        document.getElementById('cancelOrderBtn').addEventListener('click', () => {
-            document.getElementById('newOrderModal').close();
-        });
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>7</h3>
+            <p>Pedidos Concluídos</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>12%</span>
+          </div>
+        </div>
         
-        // Show call modal (for demo purposes)
-        setTimeout(() => {
-            document.getElementById('callModal').classList.add('modal--visible');
+        <div class="summary-card">
+          <div class="summary-icon">
+            <ion-icon name="cash-outline"></ion-icon>
+          </div>
+          <div class="summary-info">
+            <h3>R$ 850</h3>
+            <p>Faturamento</p>
+          </div>
+          <div class="summary-trend up">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            <span>15%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Orders Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Pedidos Ativos</h2>
+          <div class="section__actions">
+            <button class="btn btn--outline">
+              <ion-icon name="filter-outline"></ion-icon>
+              Filtrar
+            </button>
+            <button class="btn btn--primary" id="btn-new-order">
+              <ion-icon name="add-outline"></ion-icon>
+              Novo Pedido
+            </button>
+          </div>
+        </div>
+        
+        <div class="orders-container">
+          <!-- Order Card 1 -->
+          <div class="order-card order-card--new">
+            <div class="order-card__header">
+              <div class="order-card__suite">
+                <span class="suite-number">01</span>
+                <span class="suite-name">BLACK</span>
+              </div>
+              <div class="order-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>10:30</span>
+              </div>
+            </div>
+            <div class="order-card__items">
+              <div class="order-item">
+                <span class="order-item__quantity">1x</span>
+                <span class="order-item__name">Hambúrguer Especial</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">2x</span>
+                <span class="order-item__name">Batata Frita</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">2x</span>
+                <span class="order-item__name">Refrigerante Cola</span>
+              </div>
+            </div>
+            <div class="order-card__footer">
+              <div class="order-card__status">
+                <span class="status-badge status-badge--new">Novo</span>
+              </div>
+              <div class="order-card__actions">
+                <button class="btn btn--icon btn--accept">
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Order Card 2 -->
+          <div class="order-card order-card--preparing">
+            <div class="order-card__header">
+              <div class="order-card__suite">
+                <span class="suite-number">03</span>
+                <span class="suite-name">PREMIUM</span>
+              </div>
+              <div class="order-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>10:15</span>
+              </div>
+            </div>
+            <div class="order-card__items">
+              <div class="order-item">
+                <span class="order-item__quantity">2x</span>
+                <span class="order-item__name">Filé Mignon</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">1x</span>
+                <span class="order-item__name">Salada Caesar</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">1x</span>
+                <span class="order-item__name">Vinho Tinto</span>
+              </div>
+            </div>
+            <div class="order-card__footer">
+              <div class="order-card__status">
+                <span class="status-badge status-badge--preparing">Preparando</span>
+              </div>
+              <div class="order-card__actions">
+                <button class="btn btn--icon btn--complete">
+                  <ion-icon name="checkmark-done-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Order Card 3 -->
+          <div class="order-card order-card--ready">
+            <div class="order-card__header">
+              <div class="order-card__suite">
+                <span class="suite-number">02</span>
+                <span class="suite-name">ROYAL</span>
+              </div>
+              <div class="order-card__time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>10:05</span>
+              </div>
+            </div>
+            <div class="order-card__items">
+              <div class="order-item">
+                <span class="order-item__quantity">2x</span>
+                <span class="order-item__name">Pizza Margherita</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">1x</span>
+                <span class="order-item__name">Tiramisu</span>
+              </div>
+              <div class="order-item">
+                <span class="order-item__quantity">2x</span>
+                <span class="order-item__name">Água Mineral</span>
+              </div>
+            </div>
+            <div class="order-card__footer">
+              <div class="order-card__status">
+                <span class="status-badge status-badge--ready">Pronto</span>
+              </div>
+              <div class="order-card__actions">
+                <button class="btn btn--icon btn--deliver">
+                  <ion-icon name="bicycle-outline"></ion-icon>
+                </button>
+                <button class="btn btn--icon btn--call">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu Section -->
+      <section class="content__section">
+        <div class="section__header">
+          <h2 class="section__title">Menu do Dia</h2>
+          <div class="section__actions">
+            <button class="btn btn--secondary">
+              <ion-icon name="create-outline"></ion-icon>
+              Editar Menu
+            </button>
+          </div>
+        </div>
+        
+        <div class="menu-tabs">
+          <button class="menu-tab active">Entradas</button>
+          <button class="menu-tab">Pratos Principais</button>
+          <button class="menu-tab">Sobremesas</button>
+          <button class="menu-tab">Bebidas</button>
+        </div>
+        
+        <div class="menu-container">
+          <div class="menu-category active">
+            <div class="menu-items">
+              <div class="menu-item">
+                <div class="menu-item__image">
+                  <ion-icon name="restaurant-outline"></ion-icon>
+                </div>
+                <div class="menu-item__info">
+                  <h5 class="menu-item__name">Bruschetta</h5>
+                  <p class="menu-item__description">Pão italiano com tomate, alho e manjericão</p>
+                </div>
+                <div class="menu-item__price">R$ 25,00</div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-item__image">
+                  <ion-icon name="restaurant-outline"></ion-icon>
+                </div>
+                <div class="menu-item__info">
+                  <h5 class="menu-item__name">Carpaccio</h5>
+                  <p class="menu-item__description">Finas fatias de carne com molho especial</p>
+                </div>
+                <div class="menu-item__price">R$ 35,00</div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-item__image">
+                  <ion-icon name="restaurant-outline"></ion-icon>
+                </div>
+                <div class="menu-item__info">
+                  <h5 class="menu-item__name">Camarão Empanado</h5>
+                  <p class="menu-item__description">Camarões empanados com molho tártaro</p>
+                </div>
+                <div class="menu-item__price">R$ 45,00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Call Modal -->
+  <div class="modal modal--call" id="callModal">
+    <div class="modal__container">
+      <div class="modal__header">
+        <h3 class="modal__title">Chamada</h3>
+        <button class="modal__close">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="modal__content">
+        <div class="call-animation">
+          <div class="call-icon">
+            <ion-icon name="call"></ion-icon>
+          </div>
+          <div class="call-waves"></div>
+        </div>
+        <p class="modal__status" id="callStatus">Status da chamada</p>
+        <div class="call-timer">00:00</div>
+      </div>
+      <div class="modal__actions">
+        <button class="modal__button--icon modal__button--accept" id="btnAcceptCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Atender</span>
+        </button>
+        <button class="modal__button--icon modal__button--end" id="btnEndCall">
+          <ion-icon name="call"></ion-icon>
+          <span>Encerrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Order Modal -->
+  <div class="modal" id="newOrderModal">
+    <div class="modal__container modal__container--large">
+      <div class="modal__header">
+        <h3 class="modal__title">Novo Pedido</h3>
+        <button class="modal__close" id="closeOrderModal">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="modal__content">
+        <div class="form-group">
+          <label for="suiteSelect">Suíte</label>
+          <select id="suiteSelect" class="form-control">
+            <option value="1">01 - BLACK</option>
+            <option value="2">02 - ROYAL</option>
+            <option value="3">03 - PREMIUM</option>
+            <option value="4">04 - DELUXE</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Itens do Pedido</label>
+          <div class="order-builder">
+            <div class="order-builder__item">
+              <select class="form-control">
+                <option value="">Selecione um item</option>
+                <option value="bruschetta">Bruschetta</option>
+                <option value="carpaccio">Carpaccio</option>
+                <option value="file">Filé Mignon</option>
+                <option value="salmao">Salmão Grelhado</option>
+                <option value="risoto">Risoto de Funghi</option>
+                <option value="tiramisu">Tiramisu</option>
+                <option value="petit">Petit Gateau</option>
+              </select>
+              <input type="number" class="form-control form-control--small" min="1" value="1">
+              <button class="btn btn--icon btn--remove">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
             
-            // Hide after 5 seconds
-            setTimeout(() => {
-                document.getElementById('callModal').classList.remove('modal--visible');
-            }, 5000);
-        }, 10000);
-    </script>
+            <button class="btn btn--secondary btn--small btn--add-item">
+              <ion-icon name="add-outline"></ion-icon>
+              Adicionar Item
+            </button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="orderNotes">Observações</label>
+          <textarea id="orderNotes" class="form-control" rows="3" placeholder="Observações especiais para o pedido..."></textarea>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" id="cancelOrderBtn">Cancelar</button>
+        <button class="btn btn--primary" id="saveOrderBtn">Salvar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Toggle sidebar on mobile
+    document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('sidebar--expanded');
+    });
+    
+    // Menu tabs
+    const menuTabs = document.querySelectorAll('.menu-tab');
+    menuTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        menuTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+    
+    // New Order Modal
+    const newOrderModal = document.getElementById('newOrderModal');
+    const btnNewOrder = document.getElementById('btn-new-order');
+    const closeOrderModal = document.getElementById('closeOrderModal');
+    const cancelOrderBtn = document.getElementById('cancelOrderBtn');
+    
+    btnNewOrder.addEventListener('click', () => {
+      newOrderModal.classList.add('modal--visible');
+    });
+    
+    closeOrderModal.addEventListener('click', () => {
+      newOrderModal.classList.remove('modal--visible');
+    });
+    
+    cancelOrderBtn.addEventListener('click', () => {
+      newOrderModal.classList.remove('modal--visible');
+    });
+    
+    // VOIP Functionality
+    const socket = io();
+    const localAudio = document.getElementById("localAudio");
+    const remoteAudio = document.getElementById("remoteAudio");
+    const callModal = document.getElementById("callModal");
+    const callStatus = document.getElementById("callStatus");
+    const btnAcceptCall = document.getElementById("btnAcceptCall");
+    const btnEndCall = document.getElementById("btnEndCall");
+    const modalClose = document.querySelector('.modal__close');
+
+    let currentTarget = null;
+    let isBusy = false;
+    let stream = null;
+    let offer = null;
+    let pc = createPeerConnection();
+    let callTimer = null;
+    let callSeconds = 0;
+
+    socket.emit("register", "restaurante");
+
+    function createPeerConnection() {
+      const newPc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
+      newPc.ontrack = event => { remoteAudio.srcObject = event.streams[0]; };
+      newPc.onicecandidate = event => {
+        if (event.candidate && currentTarget) {
+          socket.emit("signal", { to: currentTarget, data: { candidate: event.candidate } });
+        }
+      };
+      return newPc;
+    }
+
+    async function setupLocalStream() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+      localAudio.srcObject = stream;
+    }
+
+    socket.on("call", async ({ from }) => {
+      if (isBusy) {
+        socket.emit("signal", { to: from, data: { busy: true } });
+        return;
+      }
+      currentTarget = from;
+      callStatus.textContent = `Recebendo chamada de ${from}`;
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "flex";
+      btnEndCall.style.display = "flex";
+      
+      // Add ringing animation
+      document.querySelector('.call-animation').classList.add('ringing');
+    });
+
+    socket.on("signal", async ({ from, data }) => {
+      if (data.offer) {
+        offer = data.offer;
+      } else if (data.answer) {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+        startCallTimer();
+      } else if (data.candidate && pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+      } else if (data.busy) {
+        callStatus.textContent = `${from} está ocupado.`;
+        setTimeout(() => {
+          callModal.classList.remove("modal--visible");
+        }, 3000);
+        btnAcceptCall.style.display = "none";
+        btnEndCall.style.display = "flex";
+      }
+    });
+
+    socket.on("end-call", () => {
+      endCall();
+    });
+
+    function startCallTimer() {
+      callSeconds = 0;
+      document.querySelector('.call-timer').textContent = '00:00';
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.add('in-call');
+      
+      callTimer = setInterval(() => {
+        callSeconds++;
+        const minutes = Math.floor(callSeconds / 60);
+        const seconds = callSeconds % 60;
+        document.querySelector('.call-timer').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function endCall() {
+      isBusy = false;
+      pc.close();
+      pc = createPeerConnection();
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      callModal.classList.remove("modal--visible");
+      callStatus.textContent = "Status da chamada";
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "none";
+      offer = null;
+      
+      if (callTimer) {
+        clearInterval(callTimer);
+        callTimer = null;
+      }
+      
+      document.querySelector('.call-animation').classList.remove('ringing');
+      document.querySelector('.call-animation').classList.remove('in-call');
+    }
+
+    btnAcceptCall?.addEventListener("click", async () => {
+      if (!offer) return;
+      isBusy = true;
+      await setupLocalStream();
+      await pc.setRemoteDescription(new RTCSessionDescription(offer));
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      socket.emit("signal", { to: currentTarget, data: { answer } });
+      callStatus.textContent = `Chamada em andamento com ${currentTarget}`;
+      btnAcceptCall.style.display = "none";
+      startCallTimer();
+    });
+
+    btnEndCall?.addEventListener("click", () => {
+      socket.emit("end-call");
+      endCall();
+    });
+    
+    modalClose?.addEventListener("click", () => {
+      if (isBusy) {
+        if (confirm("Deseja encerrar a chamada?")) {
+          socket.emit("end-call");
+          endCall();
+        }
+      } else {
+        callModal.classList.remove("modal--visible");
+      }
+    });
+
+    async function startCall(to) {
+      if (isBusy) return alert("Restaurante ocupado.");
+      isBusy = true;
+      currentTarget = to;
+      callStatus.textContent = `Chamando ${to}...`;
+      await setupLocalStream();
+      const offerDescription = await pc.createOffer();
+      await pc.setLocalDescription(offerDescription);
+      socket.emit("call", { to });
+      socket.emit("signal", { to, data: { offer: offerDescription } });
+      callModal.classList.add("modal--visible");
+      btnAcceptCall.style.display = "none";
+      btnEndCall.style.display = "flex";
+      
+      // Add calling animation
+      document.querySelector('.call-animation').classList.add('ringing');
+    }
+
+    document.getElementById("btn--call-to-reception")?.addEventListener("click", () => startCall("reception"));
+    document.getElementById("btn--call-to-lavanderia")?.addEventListener("click", () => startCall("lavanderia"));
+    
+    // Add click handlers for order action buttons
+    document.querySelectorAll('.btn--accept').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.order-card');
+        card.classList.remove('order-card--new');
+        card.classList.add('order-card--preparing');
+        const statusBadge = card.querySelector('.status-badge');
+        statusBadge.className = 'status-badge status-badge--preparing';
+        statusBadge.textContent = 'Preparando';
+        this.innerHTML = '<ion-icon name="checkmark-done-outline"></ion-icon>';
+        this.classList.remove('btn--accept');
+        this.classList.add('btn--complete');
+      });
+    });
+    
+    document.querySelectorAll('.btn--complete').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.order-card');
+        card.classList.remove('order-card--preparing');
+        card.classList.add('order-card--ready');
+        const statusBadge = card.querySelector('.status-badge');
+        statusBadge.className = 'status-badge status-badge--ready';
+        statusBadge.textContent = 'Pronto';
+        this.innerHTML = '<ion-icon name="bicycle-outline"></ion-icon>';
+        this.classList.remove('btn--complete');
+        this.classList.add('btn--deliver');
+      });
+    });
+    
+    document.querySelectorAll('.btn--deliver').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.order-card');
+        card.style.opacity = '0';
+        setTimeout(() => {
+          card.remove();
+        }, 300);
+      });
+    });
+  </script>
 </body>
 </html>
