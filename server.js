@@ -3,7 +3,7 @@ const https = require("https");
 const express = require("express");
 const path = require("path");
 const { Server } = require("socket.io");
-const port = 12500;
+const port = 5000;
 const app = express();
 
 // Certificados SSL (Let’s Encrypt)
